@@ -1,0 +1,1543 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>媽媽每日身體狀況記錄本</title>
+  <style>
+    :root {
+      --primary: #4f46e5;
+      --primary-light: #eef2ff;
+      --primary-hover: #4338ca;
+      --eating-color: #ea580c;
+      --eating-bg: #fff7ed;
+      --eating-border: #fed7aa;
+      --bath-color: #0284c7;
+      --bath-bg: #f0f9ff;
+      --bath-border: #bae6fd;
+      --speech-color: #16a34a;
+      --speech-bg: #f0fdf4;
+      --speech-border: #bbf7d0;
+      --gray-50: #f8fafc;
+      --gray-100: #f1f5f9;
+      --gray-200: #e2e8f0;
+      --gray-300: #cbd5e1;
+      --gray-600: #475569;
+      --gray-700: #334155;
+      --gray-800: #1e293b;
+      --gray-900: #0f172a;
+      --card-shadow: 0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -2px rgba(0,0,0,0.05);
+      --card-radius: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+      background-color: #f8fafc;
+      color: var(--gray-800);
+      line-height: 1.5;
+      padding-bottom: 70px;
+    }
+
+    /* Container */
+    .app-container {
+      max-width: 680px;
+      margin: 0 auto;
+      background: #ffffff;
+      min-height: 100vh;
+      box-shadow: 0 0 20px rgba(0,0,0,0.04);
+    }
+
+    /* Header */
+    header {
+      background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+      color: white;
+      padding: 24px 20px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      box-shadow: 0 2px 8px rgba(79, 70, 229, 0.25);
+    }
+
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+
+    .header-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .header-subtitle {
+      font-size: 0.85rem;
+      opacity: 0.9;
+      color: #e0e7ff;
+    }
+
+    .badge-today {
+      background: rgba(255,255,255,0.22);
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      backdrop-filter: blur(4px);
+    }
+
+    /* Tabs */
+    .nav-tabs {
+      display: flex;
+      background: #ffffff;
+      border-bottom: 1px solid var(--gray-200);
+      position: sticky;
+      top: 83px;
+      z-index: 40;
+    }
+
+    .nav-tab-btn {
+      flex: 1;
+      padding: 13px 0;
+      text-align: center;
+      background: none;
+      border: none;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--gray-600);
+      cursor: pointer;
+      position: relative;
+      transition: all 0.2s;
+    }
+
+    .nav-tab-btn.active {
+      color: var(--primary);
+    }
+
+    .nav-tab-btn.active::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 15%;
+      width: 70%;
+      height: 3px;
+      background: var(--primary);
+      border-radius: 3px 3px 0 0;
+    }
+
+    /* Content Area */
+    .tab-content {
+      padding: 18px;
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+      animation: fadeIn 0.2s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(3px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Form Section */
+    .date-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+      background: var(--primary-light);
+      padding: 12px 16px;
+      border-radius: 12px;
+      border: 1px solid #c7d2fe;
+    }
+
+    .date-label {
+      font-weight: 600;
+      color: var(--primary);
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .date-input {
+      border: 1px solid #a5b4fc;
+      background: #ffffff;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      color: var(--gray-800);
+      font-weight: 600;
+      outline: none;
+    }
+
+    /* Category Cards */
+    .category-card {
+      background: #ffffff;
+      border-radius: var(--card-radius);
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: var(--card-shadow);
+      border: 1px solid var(--gray-200);
+      transition: border-color 0.2s;
+    }
+
+    .category-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px dashed var(--gray-200);
+    }
+
+    .category-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .category-badge {
+      font-size: 0.78rem;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-weight: 600;
+    }
+
+    .category-card.eating .category-title { color: var(--eating-color); }
+    .category-card.eating .category-badge { background: var(--eating-bg); color: var(--eating-color); border: 1px solid var(--eating-border); }
+
+    .category-card.bath .category-title { color: var(--bath-color); }
+    .category-card.bath .category-badge { background: var(--bath-bg); color: var(--bath-color); border: 1px solid var(--bath-border); }
+
+    .category-card.speech .category-title { color: var(--speech-color); }
+    .category-card.speech .category-badge { background: var(--speech-bg); color: var(--speech-color); border: 1px solid var(--speech-border); }
+
+    .category-card.notes .category-title { color: #6366f1; }
+    .category-card.notes .category-badge { background: #eef2ff; color: #6366f1; border: 1px solid #c7d2fe; }
+
+    /* Option Selector (List of Radio Buttons as Cards) */
+    .option-list {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .option-item {
+      display: flex;
+      align-items: center;
+      padding: 11px 14px;
+      border: 1.5px solid var(--gray-200);
+      border-radius: 12px;
+      cursor: pointer;
+      background: #fafafa;
+      transition: all 0.15s ease;
+    }
+
+    .option-item:hover {
+      background: #f8fafc;
+      border-color: var(--gray-300);
+    }
+
+    .option-item input[type="radio"] {
+      display: none;
+    }
+
+    .option-score {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--gray-200);
+      color: var(--gray-700);
+      font-weight: 700;
+      font-size: 0.88rem;
+      margin-right: 12px;
+      flex-shrink: 0;
+      transition: all 0.15s ease;
+    }
+
+    .option-text {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--gray-700);
+      flex: 1;
+    }
+
+    /* Selected states by category */
+    .eating .option-item.selected {
+      background: var(--eating-bg);
+      border-color: var(--eating-color);
+    }
+    .eating .option-item.selected .option-score {
+      background: var(--eating-color);
+      color: white;
+    }
+    .eating .option-item.selected .option-text {
+      color: var(--eating-color);
+      font-weight: 700;
+    }
+
+    .bath .option-item.selected {
+      background: var(--bath-bg);
+      border-color: var(--bath-color);
+    }
+    .bath .option-item.selected .option-score {
+      background: var(--bath-color);
+      color: white;
+    }
+    .bath .option-item.selected .option-text {
+      color: var(--bath-color);
+      font-weight: 700;
+    }
+
+    .speech .option-item.selected {
+      background: var(--speech-bg);
+      border-color: var(--speech-color);
+    }
+    .speech .option-item.selected .option-score {
+      background: var(--speech-color);
+      color: white;
+    }
+    .speech .option-item.selected .option-text {
+      color: var(--speech-color);
+      font-weight: 700;
+    }
+
+    /* Notes Textarea */
+    .notes-textarea {
+      width: 100%;
+      min-height: 90px;
+      padding: 12px;
+      border-radius: 12px;
+      border: 1.5px solid var(--gray-200);
+      font-size: 0.95rem;
+      font-family: inherit;
+      resize: vertical;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .notes-textarea:focus {
+      border-color: var(--primary);
+    }
+
+    .quick-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .quick-tag {
+      font-size: 0.76rem;
+      padding: 4px 10px;
+      background: var(--gray-100);
+      border: 1px solid var(--gray-200);
+      border-radius: 14px;
+      cursor: pointer;
+      color: var(--gray-600);
+      user-select: none;
+      transition: all 0.15s;
+    }
+
+    .quick-tag:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+      border-color: #c7d2fe;
+    }
+
+    /* Save Button */
+    .btn-save-container {
+      margin-top: 10px;
+      margin-bottom: 30px;
+    }
+
+    .btn-save {
+      width: 100%;
+      background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%);
+      color: white;
+      border: none;
+      padding: 15px;
+      border-radius: 14px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.35);
+      transition: transform 0.1s, box-shadow 0.15s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn-save:active {
+      transform: scale(0.985);
+      box-shadow: 0 2px 6px rgba(79, 70, 229, 0.25);
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: rgba(15, 23, 42, 0.92);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-size: 0.92rem;
+      font-weight: 500;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      z-index: 100;
+      transition: transform 0.25s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* Statistics / Dashboard Tab */
+    .stat-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .stat-card {
+      background: white;
+      border-radius: 14px;
+      padding: 14px;
+      box-shadow: var(--card-shadow);
+      border: 1px solid var(--gray-200);
+    }
+
+    .stat-card-title {
+      font-size: 0.8rem;
+      color: var(--gray-600);
+      margin-bottom: 4px;
+      font-weight: 600;
+    }
+
+    .stat-card-val {
+      font-size: 1.5rem;
+      font-weight: 800;
+    }
+
+    .stat-card-desc {
+      font-size: 0.72rem;
+      color: var(--gray-600);
+      margin-top: 2px;
+    }
+
+    .chart-container {
+      background: white;
+      border-radius: var(--card-radius);
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: var(--card-shadow);
+      border: 1px solid var(--gray-200);
+    }
+
+    .chart-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .chart-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--gray-800);
+    }
+
+    .chart-legend {
+      display: flex;
+      gap: 12px;
+      font-size: 0.78rem;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    canvas {
+      width: 100% !important;
+      height: 220px !important;
+      display: block;
+    }
+
+    /* History List Tab */
+    .history-controls {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .search-input {
+      flex: 1;
+      padding: 9px 12px;
+      border: 1.5px solid var(--gray-200);
+      border-radius: 10px;
+      font-size: 0.9rem;
+      outline: none;
+    }
+
+    .history-card {
+      background: white;
+      border-radius: 14px;
+      padding: 14px 16px;
+      margin-bottom: 12px;
+      border: 1px solid var(--gray-200);
+      box-shadow: var(--card-shadow);
+      position: relative;
+    }
+
+    .history-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid var(--gray-100);
+    }
+
+    .history-date {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--gray-900);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .history-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn-action-icon {
+      background: none;
+      border: 1px solid var(--gray-200);
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      color: var(--gray-600);
+      transition: all 0.15s;
+    }
+
+    .btn-action-icon:hover {
+      background: var(--gray-100);
+      color: var(--gray-900);
+    }
+
+    .btn-action-icon.delete:hover {
+      background: #fee2e2;
+      color: #dc2626;
+      border-color: #fca5a5;
+    }
+
+    .history-metrics {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+
+    .metric-badge-row {
+      display: flex;
+      align-items: center;
+      font-size: 0.86rem;
+    }
+
+    .metric-label {
+      width: 52px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .metric-value-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 10px;
+      border-radius: 6px;
+      font-size: 0.84rem;
+      font-weight: 600;
+    }
+
+    .pill-eating { background: var(--eating-bg); color: var(--eating-color); border: 1px solid var(--eating-border); }
+    .pill-bath { background: var(--bath-bg); color: var(--bath-color); border: 1px solid var(--bath-border); }
+    .pill-speech { background: var(--speech-bg); color: var(--speech-color); border: 1px solid var(--speech-border); }
+
+    .history-notes-box {
+      background: #f8fafc;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      color: var(--gray-700);
+      margin-top: 6px;
+      border-left: 3px solid #6366f1;
+    }
+
+    /* Settings & Backup Tab */
+    .settings-group {
+      background: white;
+      border-radius: var(--card-radius);
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: var(--card-shadow);
+      border: 1px solid var(--gray-200);
+    }
+
+    .settings-title {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--gray-800);
+    }
+
+    .btn-setting {
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border: 1px solid var(--gray-300);
+      background: white;
+      color: var(--gray-800);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 10px;
+      transition: all 0.15s;
+    }
+
+    .btn-setting:hover {
+      background: var(--gray-50);
+      border-color: var(--gray-400);
+    }
+
+    .btn-setting.danger {
+      color: #dc2626;
+      border-color: #fecaca;
+      background: #fff5f5;
+    }
+
+    .btn-setting.danger:hover {
+      background: #fee2e2;
+    }
+
+    /* Empty state */
+    .empty-state {
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--gray-600);
+    }
+
+    .empty-icon {
+      font-size: 3rem;
+      margin-bottom: 12px;
+    }
+
+    /* Print styles */
+    @media print {
+      body { background: white; padding-bottom: 0; }
+      .app-container { box-shadow: none; max-width: 100%; }
+      header, .nav-tabs, .btn-save-container, .history-controls, .history-actions { display: none !important; }
+      .tab-content { display: block !important; padding: 0; }
+      #tab-form, #tab-settings { display: none !important; }
+      .history-card { page-break-inside: avoid; border: 1px solid #ccc; box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="app-container">
+  <!-- Header -->
+  <header>
+    <div class="header-top">
+      <div class="header-title">
+        <span>❤️</span> 媽媽每日身體狀況記錄
+      </div>
+      <div class="badge-today" id="badge-today-str">今日記錄</div>
+    </div>
+    <div class="header-subtitle">長輩健康照護日誌・日常自理能力追蹤</div>
+  </header>
+
+  <!-- Navigation Tabs -->
+  <div class="nav-tabs">
+    <button class="nav-tab-btn active" onclick="switchTab('form')">✏️ 每日填寫</button>
+    <button class="nav-tab-btn" onclick="switchTab('history')">📋 歷史明細</button>
+    <button class="nav-tab-btn" onclick="switchTab('stats')">📊 趨勢圖表</button>
+    <button class="nav-tab-btn" onclick="switchTab('settings')">⚙️ 匯出備份</button>
+  </div>
+
+  <!-- TAB 1: FORM -->
+  <div id="tab-form" class="tab-content active">
+    <!-- Date picker row -->
+    <div class="date-row">
+      <label class="date-label" for="record-date">
+        <span>📅</span> 記錄日期
+      </label>
+      <input type="date" id="record-date" class="date-input" onchange="onDateChange()">
+    </div>
+
+    <!-- Category 1: 吃飯 -->
+    <div class="category-card eating">
+      <div class="category-header">
+        <div class="category-title">
+          <span>🍚</span> 吃飯能力
+        </div>
+        <div class="category-badge">評分 1 ~ 3 分</div>
+      </div>
+      <div class="option-list" id="eating-options">
+        <label class="option-item" onclick="selectOption('eating', 3, this)">
+          <input type="radio" name="eating" value="3">
+          <span class="option-score">3</span>
+          <span class="option-text">可自己用筷子快速吃</span>
+        </label>
+        <label class="option-item" onclick="selectOption('eating', 2, this)">
+          <input type="radio" name="eating" value="2">
+          <span class="option-score">2</span>
+          <span class="option-text">可自己用筷子緩慢吃</span>
+        </label>
+        <label class="option-item" onclick="selectOption('eating', 1, this)">
+          <input type="radio" name="eating" value="1">
+          <span class="option-score">1</span>
+          <span class="option-text">可自己用湯匙快速吃</span>
+        </label>
+        <label class="option-item" onclick="selectOption('eating', 0, this)" style="opacity: 0.85;">
+          <input type="radio" name="eating" value="0">
+          <span class="option-score" style="font-size:0.75rem;">0</span>
+          <span class="option-text" style="color:#64748b;">需要他人協助餵食 / 未進食</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Category 2: 洗澡 -->
+    <div class="category-card bath">
+      <div class="category-header">
+        <div class="category-title">
+          <span>🚿</span> 洗澡自理
+        </div>
+        <div class="category-badge">評分 1 ~ 2 分</div>
+      </div>
+      <div class="option-list" id="bath-options">
+        <label class="option-item" onclick="selectOption('bath', 2, this)">
+          <input type="radio" name="bath" value="2">
+          <span class="option-score">2</span>
+          <span class="option-text">可自己沖澡及洗澡</span>
+        </label>
+        <label class="option-item" onclick="selectOption('bath', 1, this)">
+          <input type="radio" name="bath" value="1">
+          <span class="option-score">1</span>
+          <span class="option-text">可自己沖澡</span>
+        </label>
+        <label class="option-item" onclick="selectOption('bath', 0, this)" style="opacity: 0.85;">
+          <input type="radio" name="bath" value="0">
+          <span class="option-score" style="font-size:0.75rem;">0</span>
+          <span class="option-text" style="color:#64748b;">需全程協助洗澡 / 擦澡</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Category 3: 講話 -->
+    <div class="category-card speech">
+      <div class="category-header">
+        <div class="category-title">
+          <span>🗣️</span> 講話時長
+        </div>
+        <div class="category-badge">評分 1 ~ 4 分</div>
+      </div>
+      <div class="option-list" id="speech-options">
+        <label class="option-item" onclick="selectOption('speech', 4, this)">
+          <input type="radio" name="speech" value="4">
+          <span class="option-score">4</span>
+          <span class="option-text">整天可講話</span>
+        </label>
+        <label class="option-item" onclick="selectOption('speech', 3, this)">
+          <input type="radio" name="speech" value="3">
+          <span class="option-score">3</span>
+          <span class="option-text">可講話大於 5 hr</span>
+        </label>
+        <label class="option-item" onclick="selectOption('speech', 2, this)">
+          <input type="radio" name="speech" value="2">
+          <span class="option-score">2</span>
+          <span class="option-text">可講話介於 1 與 5 hr</span>
+        </label>
+        <label class="option-item" onclick="selectOption('speech', 1, this)">
+          <input type="radio" name="speech" value="1">
+          <span class="option-score">1</span>
+          <span class="option-text">可講話介於 0 與 1 hr</span>
+        </label>
+        <label class="option-item" onclick="selectOption('speech', 0, this)" style="opacity: 0.85;">
+          <input type="radio" name="speech" value="0">
+          <span class="option-score" style="font-size:0.75rem;">0</span>
+          <span class="option-text" style="color:#64748b;">幾乎無法開口 / 未講話</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Category 4: 備註 -->
+    <div class="category-card notes">
+      <div class="category-header">
+        <div class="category-title">
+          <span>📝</span> 備註與照護觀察
+        </div>
+        <div class="category-badge">文字記錄</div>
+      </div>
+      <textarea id="notes-input" class="notes-textarea" placeholder="例：今天精神狀況好、食慾佳、血壓 125/80、下午有到公園散步 20 分鐘..."></textarea>
+      <div class="quick-tags">
+        <span class="quick-tag" onclick="appendTag('精神良好')">😊 精神良好</span>
+        <span class="quick-tag" onclick="appendTag('食慾佳')">🍲 食慾佳</span>
+        <span class="quick-tag" onclick="appendTag('有點疲倦')">😴 有點疲倦</span>
+        <span class="quick-tag" onclick="appendTag('外出散步')">🚶 外出散步</span>
+        <span class="quick-tag" onclick="appendTag('準時服藥')">💊 準時服藥</span>
+        <span class="quick-tag" onclick="appendTag('情緒平穩')">🌱 情緒平穩</span>
+      </div>
+    </div>
+
+    <!-- Submit button -->
+    <div class="btn-save-container">
+      <button class="btn-save" onclick="saveRecord()">
+        <span>💾</span> 儲存今日記錄
+      </button>
+    </div>
+  </div>
+
+  <!-- TAB 2: HISTORY LIST -->
+  <div id="tab-history" class="tab-content">
+    <div class="history-controls">
+      <input type="text" id="history-search" class="search-input" placeholder="🔍 搜尋日期或備註關鍵字..." oninput="renderHistory()">
+      <button class="btn-action-icon" onclick="window.print()" title="列印或另存PDF">🖨️ 列印</button>
+    </div>
+    <div id="history-list-container">
+      <!-- Injected by JavaScript -->
+    </div>
+  </div>
+
+  <!-- TAB 3: STATISTICS & CHARTS -->
+  <div id="tab-stats" class="tab-content">
+    <div class="stat-cards-grid">
+      <div class="stat-card">
+        <div class="stat-card-title">總記錄天數</div>
+        <div class="stat-card-val" id="stat-total-days" style="color: var(--primary);">0</div>
+        <div class="stat-card-desc">累計健康紀錄</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-title">近7天吃飯均值</div>
+        <div class="stat-card-val" id="stat-avg-eating" style="color: var(--eating-color);">-</div>
+        <div class="stat-card-desc">最高 3 分</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-title">近7天洗澡均值</div>
+        <div class="stat-card-val" id="stat-avg-bath" style="color: var(--bath-color);">-</div>
+        <div class="stat-card-desc">最高 2 分</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-title">近7天講話均值</div>
+        <div class="stat-card-val" id="stat-avg-speech" style="color: var(--speech-color);">-</div>
+        <div class="stat-card-desc">最高 4 分</div>
+      </div>
+    </div>
+
+    <!-- Trend Chart -->
+    <div class="chart-container">
+      <div class="chart-header">
+        <div class="chart-title">📈 近期健康狀況變化趨勢</div>
+        <div class="chart-legend">
+          <div class="legend-item"><span class="legend-dot" style="background:var(--eating-color)"></span>吃飯</div>
+          <div class="legend-item"><span class="legend-dot" style="background:var(--bath-color)"></span>洗澡</div>
+          <div class="legend-item"><span class="legend-dot" style="background:var(--speech-color)"></span>講話</div>
+        </div>
+      </div>
+      <canvas id="trendChart"></canvas>
+    </div>
+
+    <div class="category-card" style="margin-top:12px;">
+      <div class="category-title" style="font-size:0.92rem; color:var(--gray-700); margin-bottom:8px;">
+        💡 評分標準參考指南
+      </div>
+      <div style="font-size:0.83rem; color:var(--gray-600); line-height:1.6;">
+        <b>吃飯：</b>3 分(筷子快) / 2 分(筷子慢) / 1 分(湯匙快) / 0 分(需餵食)<br>
+        <b>洗澡：</b>2 分(沖澡及洗澡) / 1 分(沖澡) / 0 分(需全程協助)<br>
+        <b>講話：</b>4 分(整天) / 3 分(>5hr) / 2 分(1~5hr) / 1 分(0~1hr) / 0 分(無法講話)
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 4: SETTINGS & BACKUP -->
+  <div id="tab-settings" class="tab-content">
+    <div class="settings-group">
+      <div class="settings-title">📤 資料備份與匯出</div>
+      <button class="btn-setting" onclick="exportCSV()">
+        <span>📑</span> 匯出為 Excel CSV 檔案
+      </button>
+      <button class="btn-setting" onclick="exportJSON()">
+        <span>💾</span> 匯出 JSON 完整備份檔
+      </button>
+    </div>
+
+    <div class="settings-group">
+      <div class="settings-title">📥 資料匯入還原</div>
+      <input type="file" id="import-file" accept=".json" style="display:none" onchange="importJSON(event)">
+      <button class="btn-setting" onclick="document.getElementById('import-file').click()">
+        <span>📂</span> 選擇 JSON 檔案還原
+      </button>
+    </div>
+
+    <div class="settings-group">
+      <div class="settings-title">🧪 示範資料</div>
+      <button class="btn-setting" onclick="loadSampleData()">
+        <span>✨</span> 載入一週範例資料（供檢視圖表）
+      </button>
+    </div>
+
+    <div class="settings-group">
+      <div class="settings-title" style="color:#dc2626;">⚠️ 清理資料</div>
+      <button class="btn-setting danger" onclick="clearAllData()">
+        <span>🗑️</span> 清空所有記錄
+      </button>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="toast">
+    <span id="toast-icon">✅</span>
+    <span id="toast-msg">已成功儲存</span>
+  </div>
+</div>
+
+<script>
+  // Definition Mapping
+  const DEFINITIONS = {
+    eating: {
+      3: '可自己用筷子快速吃',
+      2: '可自己用筷子緩慢吃',
+      1: '可自己用湯匙快速吃',
+      0: '需要他人協助餵食 / 未進食'
+    },
+    bath: {
+      2: '可自己沖澡及洗澡',
+      1: '可自己沖澡',
+      0: '需全程協助洗澡 / 擦澡'
+    },
+    speech: {
+      4: '整天可講話',
+      3: '可講話大於5hr',
+      2: '可講話介於1與5hr',
+      1: '可講話介於0與1hr',
+      0: '幾乎無法開口 / 未講話'
+    }
+  };
+
+  const STORAGE_KEY = 'mom_health_records_v1';
+
+  // Get local date string YYYY-MM-DD
+  function getTodayString() {
+    const d = new Date();
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }
+
+  // Load all records from LocalStorage
+  function getRecords() {
+    try {
+      const data = localStorage.getItem(STORAGE_KEY);
+      return data ? JSON.parse(data) : {};
+    } catch (e) {
+      console.error(e);
+      return {};
+    }
+  }
+
+  // Save records object
+  function saveRecords(records) {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  // Current Form State
+  let currentSelection = {
+    eating: null,
+    bath: null,
+    speech: null
+  };
+
+  // Switch Tabs
+  function switchTab(tabName) {
+    document.querySelectorAll('.nav-tab-btn').forEach(btn => btn.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+    const tabButtons = {
+      'form': 0,
+      'history': 1,
+      'stats': 2,
+      'settings': 3
+    };
+
+    const btns = document.querySelectorAll('.nav-tab-btn');
+    if (btns[tabButtons[tabName]]) {
+      btns[tabButtons[tabName]].classList.add('active');
+    }
+    const tabEl = document.getElementById(`tab-${tabName}`);
+    if (tabEl) {
+      tabEl.classList.add('active');
+    }
+
+    if (tabName === 'history') {
+      renderHistory();
+    } else if (tabName === 'stats') {
+      renderStats();
+    }
+  }
+
+  // Toast
+  function showToast(msg, icon = '✅') {
+    const toast = document.getElementById('toast');
+    document.getElementById('toast-msg').innerText = msg;
+    document.getElementById('toast-icon').innerText = icon;
+    toast.classList.add('show');
+    setTimeout(() => {
+      toast.classList.remove('show');
+    }, 2400);
+  }
+
+  // Radio button click handling
+  function selectOption(category, score, itemEl) {
+    currentSelection[category] = score;
+    const parent = itemEl.parentElement;
+    parent.querySelectorAll('.option-item').forEach(el => el.classList.remove('selected'));
+    itemEl.classList.add('selected');
+    const radio = itemEl.querySelector('input[type="radio"]');
+    if (radio) radio.checked = true;
+  }
+
+  // Append quick tag to notes
+  function appendTag(tagText) {
+    const txt = document.getElementById('notes-input');
+    if (txt.value.trim().length > 0) {
+      txt.value += '，' + tagText;
+    } else {
+      txt.value = tagText;
+    }
+    txt.focus();
+  }
+
+  // On date picker change
+  function onDateChange() {
+    const selectedDate = document.getElementById('record-date').value;
+    loadDateData(selectedDate);
+  }
+
+  // Load record for specific date into form
+  function loadDateData(dateStr) {
+    const records = getRecords();
+    const rec = records[dateStr];
+
+    // Reset UI
+    ['eating', 'bath', 'speech'].forEach(cat => {
+      currentSelection[cat] = null;
+      const listEl = document.getElementById(`${cat}-options`);
+      listEl.querySelectorAll('.option-item').forEach(el => el.classList.remove('selected'));
+      listEl.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
+    });
+    document.getElementById('notes-input').value = '';
+
+    if (rec) {
+      // Set values if already exists
+      if (rec.eating !== undefined && rec.eating !== null) {
+        setCategoryUI('eating', rec.eating);
+      }
+      if (rec.bath !== undefined && rec.bath !== null) {
+        setCategoryUI('bath', rec.bath);
+      }
+      if (rec.speech !== undefined && rec.speech !== null) {
+        setCategoryUI('speech', rec.speech);
+      }
+      if (rec.notes) {
+        document.getElementById('notes-input').value = rec.notes;
+      }
+      showToast(`已載入 ${dateStr} 的已存紀錄`, 'ℹ️');
+    }
+  }
+
+  function setCategoryUI(category, score) {
+    currentSelection[category] = Number(score);
+    const listEl = document.getElementById(`${category}-options`);
+    const radio = listEl.querySelector(`input[value="${score}"]`);
+    if (radio) {
+      radio.checked = true;
+      const itemEl = radio.closest('.option-item');
+      if (itemEl) itemEl.classList.add('selected');
+    }
+  }
+
+  // Save Record
+  function saveRecord() {
+    const dateStr = document.getElementById('record-date').value;
+    if (!dateStr) {
+      alert('請先選擇日期！');
+      return;
+    }
+
+    if (currentSelection.eating === null || currentSelection.bath === null || currentSelection.speech === null) {
+      const missing = [];
+      if (currentSelection.eating === null) missing.push('吃飯');
+      if (currentSelection.bath === null) missing.push('洗澡');
+      if (currentSelection.speech === null) missing.push('講話');
+      if (!confirm(`您尚未選擇【${missing.join('、')}】的評分，確定仍要儲存嗎？`)) {
+        return;
+      }
+    }
+
+    const notes = document.getElementById('notes-input').value.trim();
+    const records = getRecords();
+
+    records[dateStr] = {
+      date: dateStr,
+      eating: currentSelection.eating,
+      bath: currentSelection.bath,
+      speech: currentSelection.speech,
+      notes: notes,
+      updatedAt: new Date().toISOString()
+    };
+
+    saveRecords(records);
+    showToast(`${dateStr} 記錄已成功儲存！`, '🎉');
+  }
+
+  // Render History List
+  function renderHistory() {
+    const container = document.getElementById('history-list-container');
+    const searchTerm = (document.getElementById('history-search').value || '').trim().toLowerCase();
+    const records = getRecords();
+    const dates = Object.keys(records).sort().reverse();
+
+    if (dates.length === 0) {
+      container.innerHTML = `
+        <div class="empty-state">
+          <div class="empty-icon">📝</div>
+          <div style="font-weight:600; font-size:1.1rem; margin-bottom:6px;">尚無任何記錄</div>
+          <div style="font-size:0.88rem;">請切換至「每日填寫」新增第一筆媽媽的健康日誌</div>
+        </div>
+      `;
+      return;
+    }
+
+    let filteredDates = dates;
+    if (searchTerm) {
+      filteredDates = dates.filter(d => {
+        const r = records[d];
+        const notes = (r.notes || '').toLowerCase();
+        return d.includes(searchTerm) || notes.includes(searchTerm);
+      });
+    }
+
+    if (filteredDates.length === 0) {
+      container.innerHTML = `
+        <div class="empty-state">
+          <div class="empty-icon">🔍</div>
+          <div>找不到符合「${searchTerm}」的歷史紀錄</div>
+        </div>
+      `;
+      return;
+    }
+
+    let html = '';
+    filteredDates.forEach(date => {
+      const r = records[date];
+      const eatingText = r.eating !== null && r.eating !== undefined ? `${r.eating}分: ${DEFINITIONS.eating[r.eating] || '自訂'}` : '未記錄';
+      const bathText = r.bath !== null && r.bath !== undefined ? `${r.bath}分: ${DEFINITIONS.bath[r.bath] || '自訂'}` : '未記錄';
+      const speechText = r.speech !== null && r.speech !== undefined ? `${r.speech}分: ${DEFINITIONS.speech[r.speech] || '自訂'}` : '未記錄';
+
+      html += `
+        <div class="history-card">
+          <div class="history-card-header">
+            <div class="history-date">
+              <span>📅</span> ${date}
+            </div>
+            <div class="history-actions">
+              <button class="btn-action-icon" onclick="editRecord('${date}')" title="編輯此筆">✏️ 編輯</button>
+              <button class="btn-action-icon delete" onclick="deleteRecord('${date}')" title="刪除此筆">🗑️ 刪除</button>
+            </div>
+          </div>
+          <div class="history-metrics">
+            <div class="metric-badge-row">
+              <span class="metric-label" style="color:var(--eating-color)">🍚 吃飯</span>
+              <span class="metric-value-pill pill-eating">${eatingText}</span>
+            </div>
+            <div class="metric-badge-row">
+              <span class="metric-label" style="color:var(--bath-color)">🚿 洗澡</span>
+              <span class="metric-value-pill pill-bath">${bathText}</span>
+            </div>
+            <div class="metric-badge-row">
+              <span class="metric-label" style="color:var(--speech-color)">🗣️ 講話</span>
+              <span class="metric-value-pill pill-speech">${speechText}</span>
+            </div>
+          </div>
+          ${r.notes ? `<div class="history-notes-box"><b>備註：</b>${escapeHtml(r.notes)}</div>` : ''}
+        </div>
+      `;
+    });
+
+    container.innerHTML = html;
+  }
+
+  function escapeHtml(str) {
+    if (!str) return '';
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  // Edit record
+  function editRecord(dateStr) {
+    document.getElementById('record-date').value = dateStr;
+    loadDateData(dateStr);
+    switchTab('form');
+  }
+
+  // Delete record
+  function deleteRecord(dateStr) {
+    if (confirm(`確定要刪除 ${dateStr} 的這筆記錄嗎？`)) {
+      const records = getRecords();
+      delete records[dateStr];
+      saveRecords(records);
+      renderHistory();
+      showToast(`已刪除 ${dateStr} 的記錄`, '🗑️');
+    }
+  }
+
+  // Render Stats & Canvas Chart
+  function renderStats() {
+    const records = getRecords();
+    const dates = Object.keys(records).sort();
+    document.getElementById('stat-total-days').innerText = dates.length;
+
+    // Calculate last 7 recorded days average
+    const recentDates = dates.slice(-7);
+    if (recentDates.length > 0) {
+      let sumE = 0, countE = 0;
+      let sumB = 0, countB = 0;
+      let sumS = 0, countS = 0;
+
+      recentDates.forEach(d => {
+        const r = records[d];
+        if (r.eating !== null && r.eating !== undefined) { sumE += Number(r.eating); countE++; }
+        if (r.bath !== null && r.bath !== undefined) { sumB += Number(r.bath); countB++; }
+        if (r.speech !== null && r.speech !== undefined) { sumS += Number(r.speech); countS++; }
+      });
+
+      document.getElementById('stat-avg-eating').innerText = countE ? (sumE / countE).toFixed(1) : '-';
+      document.getElementById('stat-avg-bath').innerText = countB ? (sumB / countB).toFixed(1) : '-';
+      document.getElementById('stat-avg-speech').innerText = countS ? (sumS / countS).toFixed(1) : '-';
+    } else {
+      document.getElementById('stat-avg-eating').innerText = '-';
+      document.getElementById('stat-avg-bath').innerText = '-';
+      document.getElementById('stat-avg-speech').innerText = '-';
+    }
+
+    drawTrendChart(dates.slice(-14), records);
+  }
+
+  // Pure Canvas Chart Implementation (Zero external dependency)
+  function drawTrendChart(chartDates, records) {
+    const canvas = document.getElementById('trendChart');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+
+    // Handle high DPI
+    const dpr = window.devicePixelRatio || 1;
+    const rect = canvas.getBoundingClientRect();
+    const width = rect.width || 600;
+    const height = 220;
+
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
+    ctx.scale(dpr, dpr);
+
+    ctx.clearRect(0, 0, width, height);
+
+    if (chartDates.length === 0) {
+      ctx.fillStyle = '#94a3b8';
+      ctx.font = '14px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('尚無足夠記錄可繪製趨勢圖', width / 2, height / 2);
+      return;
+    }
+
+    const padding = { top: 25, right: 25, bottom: 35, left: 35 };
+    const chartW = width - padding.left - padding.right;
+    const chartH = height - padding.top - padding.bottom;
+
+    // Y Axis: 0 to 4
+    const maxY = 4;
+    ctx.strokeStyle = '#e2e8f0';
+    ctx.lineWidth = 1;
+    ctx.font = '11px sans-serif';
+    ctx.fillStyle = '#64748b';
+    ctx.textAlign = 'right';
+
+    for (let y = 0; y <= maxY; y++) {
+      const yPos = padding.top + chartH - (y / maxY) * chartH;
+      ctx.beginPath();
+      ctx.moveTo(padding.left, yPos);
+      ctx.lineTo(width - padding.right, yPos);
+      ctx.stroke();
+      ctx.fillText(y + '分', padding.left - 6, yPos + 4);
+    }
+
+    // X Axis Points
+    const numPoints = chartDates.length;
+    const stepX = numPoints > 1 ? chartW / (numPoints - 1) : chartW / 2;
+
+    // Series definitions
+    const series = [
+      { key: 'eating', color: '#ea580c', values: [] },
+      { key: 'bath', color: '#0284c7', values: [] },
+      { key: 'speech', color: '#16a34a', values: [] }
+    ];
+
+    chartDates.forEach((d, idx) => {
+      const r = records[d];
+      const x = numPoints > 1 ? padding.left + idx * stepX : padding.left + chartW / 2;
+      series.forEach(s => {
+        s.values.push({
+          x: x,
+          y: r && r[s.key] !== null && r[s.key] !== undefined ? r[s.key] : null
+        });
+      });
+
+      // Draw date label on X axis
+      ctx.fillStyle = '#64748b';
+      ctx.textAlign = 'center';
+      const shortDate = d.slice(5); // MM-DD
+      ctx.fillText(shortDate, x, height - padding.bottom + 18);
+    });
+
+    // Draw lines and dots
+    series.forEach(s => {
+      ctx.strokeStyle = s.color;
+      ctx.lineWidth = 2.5;
+      ctx.beginPath();
+      let started = false;
+
+      s.values.forEach(pt => {
+        if (pt.y !== null) {
+          const yPos = padding.top + chartH - (pt.y / maxY) * chartH;
+          if (!started) {
+            ctx.moveTo(pt.x, yPos);
+            started = true;
+          } else {
+            ctx.lineTo(pt.x, yPos);
+          }
+        }
+      });
+      ctx.stroke();
+
+      // Draw point markers
+      s.values.forEach(pt => {
+        if (pt.y !== null) {
+          const yPos = padding.top + chartH - (pt.y / maxY) * chartH;
+          ctx.fillStyle = '#ffffff';
+          ctx.beginPath();
+          ctx.arc(pt.x, yPos, 4.5, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.strokeStyle = s.color;
+          ctx.lineWidth = 2.5;
+          ctx.stroke();
+        }
+      });
+    });
+  }
+
+  // Export to CSV with UTF-8 BOM
+  function exportCSV() {
+    const records = getRecords();
+    const dates = Object.keys(records).sort();
+    if (dates.length === 0) {
+      alert('目前尚無記錄可匯出！');
+      return;
+    }
+
+    let csv = '﻿'; // UTF-8 BOM for Excel
+    csv += '日期,吃飯等級,吃飯描述,洗澡等級,洗澡描述,講話等級,講話描述,備註,最後更新時間\n';
+
+    dates.forEach(d => {
+      const r = records[d];
+      const eScore = r.eating !== null && r.eating !== undefined ? r.eating : '';
+      const eText = DEFINITIONS.eating[r.eating] || '';
+      const bScore = r.bath !== null && r.bath !== undefined ? r.bath : '';
+      const bText = DEFINITIONS.bath[r.bath] || '';
+      const sScore = r.speech !== null && r.speech !== undefined ? r.speech : '';
+      const sText = DEFINITIONS.speech[r.speech] || '';
+      const notes = (r.notes || '').replace(/"/g, '""');
+      const updatedAt = r.updatedAt || '';
+
+      csv += `"${d}","${eScore}","${eText}","${bScore}","${bText}","${sScore}","${sText}","${notes}","${updatedAt}"\n`;
+    });
+
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `媽媽身體狀況記錄_${getTodayString()}.csv`;
+    link.click();
+    URL.revokeObjectURL(url);
+    showToast('已匯出 CSV 檔案！', '📑');
+  }
+
+  // Export JSON Backup
+  function exportJSON() {
+    const records = getRecords();
+    const jsonStr = JSON.stringify(records, null, 2);
+    const blob = new Blob([jsonStr], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `媽媽健康記錄備份_${getTodayString()}.json`;
+    link.click();
+    URL.revokeObjectURL(url);
+    showToast('已匯出完整備份檔！', '💾');
+  }
+
+  // Import JSON Backup
+  function importJSON(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      try {
+        const imported = JSON.parse(e.target.result);
+        if (typeof imported !== 'object') throw new Error('檔案格式錯誤');
+        
+        if (confirm(`確定要匯入 ${Object.keys(imported).length} 筆記錄嗎？這將合併現有資料。`)) {
+          const current = getRecords();
+          const merged = { ...current, ...imported };
+          saveRecords(merged);
+          showToast('成功匯入並合併記錄！', '🎉');
+          renderHistory();
+          renderStats();
+          loadDateData(document.getElementById('record-date').value);
+        }
+      } catch (err) {
+        alert('匯入失敗：' + err.message);
+      }
+    };
+    reader.readAsText(file);
+    event.target.value = '';
+  }
+
+  // Load sample data for demonstration
+  function loadSampleData() {
+    if (!confirm('要載入最近 7 天的示範資料供檢視與測試嗎？')) return;
+
+    const sample = {};
+    const today = new Date();
+    for (let i = 6; i >= 0; i--) {
+      const d = new Date(today);
+      d.setDate(d.getDate() - i);
+      const year = d.getFullYear();
+      const month = String(d.getMonth() + 1).padStart(2, '0');
+      const day = String(d.getDate()).padStart(2, '0');
+      const dStr = `${year}-${month}-${day}`;
+
+      const eChoice = [3, 3, 2, 3, 2, 3, 3][6 - i];
+      const bChoice = [2, 2, 1, 2, 2, 2, 2][6 - i];
+      const sChoice = [4, 3, 3, 4, 2, 4, 3][6 - i];
+      const sampleNotes = [
+        '精神很好，午餐吃得很香',
+        '自己拿筷子吃完一整碗麵，有到客廳走動',
+        '稍微有點累，洗澡時幫忙提醒步驟',
+        '與鄰居阿姨聊天很有活力，說話順暢',
+        '下午下雨在房間休息，食慾正常',
+        '天氣好，早上去庭院曬太陽20分鐘',
+        '今天整體狀況很平穩，血壓正常'
+      ][6 - i];
+
+      sample[dStr] = {
+        date: dStr,
+        eating: eChoice,
+        bath: bChoice,
+        speech: sChoice,
+        notes: sampleNotes,
+        updatedAt: new Date().toISOString()
+      };
+    }
+
+    const current = getRecords();
+    const merged = { ...current, ...sample };
+    saveRecords(merged);
+    showToast('已成功載入示範資料！', '✨');
+    onDateChange();
+    renderHistory();
+    renderStats();
+  }
+
+  // Clear all data
+  function clearAllData() {
+    if (confirm('確定要清空所有記錄嗎？此動作無法復原！建議先匯出備份。')) {
+      localStorage.removeItem(STORAGE_KEY);
+      showToast('所有記錄已清空', '🗑️');
+      onDateChange();
+      renderHistory();
+      renderStats();
+    }
+  }
+
+  // Initialize on load
+  window.addEventListener('DOMContentLoaded', () => {
+    const todayStr = getTodayString();
+    document.getElementById('record-date').value = todayStr;
+    document.getElementById('badge-today-str').innerText = todayStr;
+    loadDateData(todayStr);
+
+    // Resize listener for responsive chart
+    window.addEventListener('resize', () => {
+      const activeTab = document.querySelector('.tab-content.active');
+      if (activeTab && activeTab.id === 'tab-stats') {
+        renderStats();
+      }
+    });
+  });
+</script>
+</body>
+</html>
