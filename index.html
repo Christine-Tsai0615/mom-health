@@ -774,39 +774,44 @@
       </div>
     </div>
 
-    <!-- Category 3: 講話 -->
+    <!-- Category 3: 講話與精神專注 -->
     <div class="category-card speech">
       <div class="category-header">
         <div class="category-title">
-          <span>🗣️</span> 講話時長
+          <span>🗣️</span> 講話與專注表現
         </div>
-        <div class="category-badge">評分 1 ~ 4 分</div>
+        <div class="category-badge">評分 0 ~ 5 分</div>
       </div>
       <div class="option-list" id="speech-options">
+        <label class="option-item" onclick="selectOption('speech', 5, this)">
+          <input type="radio" name="speech" value="5">
+          <span class="option-score">5</span>
+          <span class="option-text">整天可講話</span>
+        </label>
         <label class="option-item" onclick="selectOption('speech', 4, this)">
           <input type="radio" name="speech" value="4">
           <span class="option-score">4</span>
-          <span class="option-text">整天可講話</span>
+          <span class="option-text">可講話大於 5 hr</span>
         </label>
         <label class="option-item" onclick="selectOption('speech', 3, this)">
           <input type="radio" name="speech" value="3">
           <span class="option-score">3</span>
-          <span class="option-text">可講話大於 5 hr</span>
+          <span class="option-text">可講話介於 1 與 5 hr</span>
         </label>
         <label class="option-item" onclick="selectOption('speech', 2, this)">
           <input type="radio" name="speech" value="2">
           <span class="option-score">2</span>
-          <span class="option-text">可講話介於 1 與 5 hr</span>
+          <span class="option-text">可講話介於 0 與 1 hr</span>
         </label>
         <label class="option-item" onclick="selectOption('speech', 1, this)">
           <input type="radio" name="speech" value="1">
           <span class="option-score">1</span>
-          <span class="option-text">可講話介於 0 與 1 hr</span>
+          <span class="option-text">無法講話</span>
         </label>
-        <label class="option-item" onclick="selectOption('speech', 0, this)" style="opacity: 0.85;">
+        <label class="option-item" onclick="selectOption('speech', 0, this)">
           <input type="radio" name="speech" value="0">
-          <span class="option-score" style="font-size:0.75rem;">0</span>
-          <span class="option-text" style="color:#64748b;">幾乎無法開口 / 未講話</span>
+          <span class="option-score">0</span>
+          <span class="option-text">注意力不足</span>
         </label>
       </div>
     </div>
@@ -860,17 +865,17 @@
       <div class="stat-card">
         <div class="stat-card-title">近7天吃飯均值</div>
         <div class="stat-card-val" id="stat-avg-eating" style="color: var(--eating-color);">-</div>
-        <div class="stat-card-desc">最高 3 分</div>
+        <div class="stat-card-desc">滿分 3 分</div>
       </div>
       <div class="stat-card">
         <div class="stat-card-title">近7天洗澡均值</div>
         <div class="stat-card-val" id="stat-avg-bath" style="color: var(--bath-color);">-</div>
-        <div class="stat-card-desc">最高 2 分</div>
+        <div class="stat-card-desc">滿分 2 分</div>
       </div>
       <div class="stat-card">
         <div class="stat-card-title">近7天講話均值</div>
         <div class="stat-card-val" id="stat-avg-speech" style="color: var(--speech-color);">-</div>
-        <div class="stat-card-desc">最高 4 分</div>
+        <div class="stat-card-desc">滿分 5 分</div>
       </div>
     </div>
 
@@ -894,7 +899,7 @@
       <div style="font-size:0.83rem; color:var(--gray-600); line-height:1.6;">
         <b>吃飯：</b>3 分(筷子快) / 2 分(筷子慢) / 1 分(湯匙快) / 0 分(需餵食)<br>
         <b>洗澡：</b>2 分(沖澡及洗澡) / 1 分(沖澡) / 0 分(需全程協助)<br>
-        <b>講話：</b>4 分(整天) / 3 分(>5hr) / 2 分(1~5hr) / 1 分(0~1hr) / 0 分(無法講話)
+        <b>講話：</b>5 分(整天) / 4 分(>5hr) / 3 分(1~5hr) / 2 分(0~1hr) / 1 分(無法講話) / 0 分(注意力不足)
       </div>
     </div>
   </div>
@@ -956,11 +961,12 @@
       0: '需全程協助洗澡 / 擦澡'
     },
     speech: {
-      4: '整天可講話',
-      3: '可講話大於5hr',
-      2: '可講話介於1與5hr',
-      1: '可講話介於0與1hr',
-      0: '幾乎無法開口 / 未講話'
+      5: '整天可講話',
+      4: '可講話大於 5 hr',
+      3: '可講話介於 1 與 5 hr',
+      2: '可講話介於 0 與 1 hr',
+      1: '無法講話',
+      0: '注意力不足'
     }
   };
 
@@ -1307,8 +1313,8 @@
     const chartW = width - padding.left - padding.right;
     const chartH = height - padding.top - padding.bottom;
 
-    // Y Axis: 0 to 4
-    const maxY = 4;
+    // Y Axis: 0 to 5
+    const maxY = 5;
     ctx.strokeStyle = '#e2e8f0';
     ctx.lineWidth = 1;
     ctx.font = '11px sans-serif';
@@ -1482,7 +1488,7 @@
 
       const eChoice = [3, 3, 2, 3, 2, 3, 3][6 - i];
       const bChoice = [2, 2, 1, 2, 2, 2, 2][6 - i];
-      const sChoice = [4, 3, 3, 4, 2, 4, 3][6 - i];
+      const sChoice = [5, 4, 3, 4, 2, 5, 0][6 - i];
       const sampleNotes = [
         '精神很好，午餐吃得很香',
         '自己拿筷子吃完一整碗麵，有到客廳走動',
@@ -1490,7 +1496,7 @@
         '與鄰居阿姨聊天很有活力，說話順暢',
         '下午下雨在房間休息，食慾正常',
         '天氣好，早上去庭院曬太陽20分鐘',
-        '今天整體狀況很平穩，血壓正常'
+        '今天精神較差，注意力較不集中'
       ][6 - i];
 
       sample[dStr] = {
