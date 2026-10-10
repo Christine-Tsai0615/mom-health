@@ -19,6 +19,10 @@
       --speech-dark: #15803d;
       --speech-bg: #f0fdf4;
       --speech-border: #bbf7d0;
+      --absence-color: #9333ea;
+      --absence-dark: #7e22ce;
+      --absence-bg: #faf5ff;
+      --absence-border: #e9d5ff;
       --gray-50: #f8fafc;
       --gray-100: #f1f5f9;
       --gray-200: #e2e8f0;
@@ -228,6 +232,9 @@
     .category-card.speech .category-title { color: var(--speech-color); }
     .category-card.speech .category-badge { background: var(--speech-bg); color: var(--speech-color); border: 1px solid var(--speech-border); }
 
+    .category-card.absence .category-title { color: var(--absence-color); }
+    .category-card.absence .category-badge { background: var(--absence-bg); color: var(--absence-color); border: 1px solid var(--absence-border); }
+
     .category-card.notes .category-title { color: #6366f1; }
     .category-card.notes .category-badge { background: #eef2ff; color: #6366f1; border: 1px solid #c7d2fe; }
 
@@ -308,13 +315,21 @@
       font-weight: 700;
     }
 
-    /* Speech Slider UI */
+    /* Sliders styling (Common + Themed) */
     .slider-box {
+      border-radius: 14px;
+      padding: 16px 14px 12px;
+      margin-top: 4px;
+    }
+
+    .slider-box.speech-box {
       background: #f0fdf4;
       border: 1.5px solid #bbf7d0;
-      border-radius: 14px;
-      padding: 18px 16px 14px;
-      margin-top: 4px;
+    }
+
+    .slider-box.absence-box {
+      background: #faf5ff;
+      border: 1.5px solid #e9d5ff;
     }
 
     .slider-display-row {
@@ -325,45 +340,45 @@
     }
 
     .slider-val-large {
-      font-size: 2.2rem;
+      font-size: 2.1rem;
       font-weight: 800;
-      color: var(--speech-dark);
       font-feature-settings: "tnum";
       line-height: 1;
     }
 
+    .speech-box .slider-val-large { color: var(--speech-dark); }
+    .absence-box .slider-val-large { color: var(--absence-dark); }
+
     .slider-val-unit {
-      font-size: 1rem;
+      font-size: 0.95rem;
       font-weight: 600;
-      color: var(--speech-color);
       margin-left: 4px;
     }
 
+    .speech-box .slider-val-unit { color: var(--speech-color); }
+    .absence-box .slider-val-unit { color: var(--absence-color); }
+
     .slider-status-tag {
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       font-weight: 600;
       padding: 4px 10px;
       border-radius: 20px;
       background: white;
-      border: 1px solid #86efac;
-      color: var(--speech-dark);
     }
 
     .slider-control-row {
       display: flex;
       align-items: center;
       gap: 12px;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
 
     .btn-step {
-      width: 40px;
-      height: 40px;
+      width: 38px;
+      height: 38px;
       border-radius: 50%;
-      border: 1.5px solid #86efac;
       background: white;
-      color: var(--speech-dark);
-      font-size: 1.3rem;
+      font-size: 1.25rem;
       font-weight: 700;
       display: flex;
       align-items: center;
@@ -374,50 +389,54 @@
       flex-shrink: 0;
     }
 
-    .btn-step:hover {
-      background: #dcfce7;
-      border-color: #4ade80;
+    .speech-box .btn-step {
+      border: 1.5px solid #86efac;
+      color: var(--speech-dark);
     }
+    .speech-box .btn-step:hover { background: #dcfce7; }
 
-    .btn-step:active {
-      transform: scale(0.92);
+    .absence-box .btn-step {
+      border: 1.5px solid #d8b4fe;
+      color: var(--absence-dark);
     }
+    .absence-box .btn-step:hover { background: #f3e8ff; }
+
+    .btn-step:active { transform: scale(0.92); }
 
     .slider-input {
       flex: 1;
       -webkit-appearance: none;
       width: 100%;
-      height: 10px;
+      height: 9px;
       border-radius: 5px;
-      background: #bbf7d0;
       outline: none;
       transition: background 0.2s;
     }
 
-    .slider-input::-webkit-slider-thumb {
+    .speech-box .slider-input { background: #bbf7d0; }
+    .absence-box .slider-input { background: #e9d5ff; }
+
+    .speech-box .slider-input::-webkit-slider-thumb {
       -webkit-appearance: none;
       appearance: none;
-      width: 26px;
-      height: 26px;
+      width: 25px;
+      height: 25px;
       border-radius: 50%;
       background: #16a34a;
       cursor: pointer;
       box-shadow: 0 2px 6px rgba(22, 163, 74, 0.4);
       border: 2.5px solid #ffffff;
-      transition: transform 0.1s;
     }
 
-    .slider-input::-webkit-slider-thumb:active {
-      transform: scale(1.18);
-    }
-
-    .slider-input::-moz-range-thumb {
-      width: 26px;
-      height: 26px;
+    .absence-box .slider-input::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 25px;
+      height: 25px;
       border-radius: 50%;
-      background: #16a34a;
+      background: #9333ea;
       cursor: pointer;
-      box-shadow: 0 2px 6px rgba(22, 163, 74, 0.4);
+      box-shadow: 0 2px 6px rgba(147, 51, 234, 0.4);
       border: 2.5px solid #ffffff;
     }
 
@@ -425,11 +444,13 @@
       display: flex;
       justify-content: space-between;
       font-size: 0.72rem;
-      color: #65a30d;
       font-weight: 600;
       margin-top: 2px;
       padding: 0 4px;
     }
+
+    .speech-box .slider-ticks { color: #65a30d; }
+    .absence-box .slider-ticks { color: #9333ea; }
 
     .quick-hour-presets {
       display: flex;
@@ -437,30 +458,32 @@
       gap: 6px;
       margin-top: 10px;
       padding-top: 10px;
-      border-top: 1px dashed #bbf7d0;
     }
+
+    .speech-box .quick-hour-presets { border-top: 1px dashed #bbf7d0; }
+    .absence-box .quick-hour-presets { border-top: 1px dashed #e9d5ff; }
 
     .btn-preset {
       font-size: 0.78rem;
-      padding: 4px 10px;
+      padding: 4px 9px;
       border-radius: 8px;
-      border: 1px solid #86efac;
       background: #ffffff;
-      color: var(--speech-dark);
       cursor: pointer;
       font-weight: 600;
       transition: all 0.15s;
     }
 
-    .btn-preset:hover {
-      background: #dcfce7;
+    .speech-box .btn-preset {
+      border: 1px solid #86efac;
+      color: var(--speech-dark);
     }
+    .speech-box .btn-preset:hover { background: #dcfce7; }
 
-    .btn-preset.active {
-      background: #16a34a;
-      color: white;
-      border-color: #16a34a;
+    .absence-box .btn-preset {
+      border: 1px solid #d8b4fe;
+      color: var(--absence-dark);
     }
+    .absence-box .btn-preset:hover { background: #f3e8ff; }
 
     /* Notes Textarea */
     .notes-textarea {
@@ -576,14 +599,14 @@
     }
 
     .stat-card-title {
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       color: var(--gray-600);
       margin-bottom: 4px;
       font-weight: 600;
     }
 
     .stat-card-val {
-      font-size: 1.5rem;
+      font-size: 1.45rem;
       font-weight: 800;
     }
 
@@ -620,17 +643,55 @@
       gap: 6px;
     }
 
+    .chart-controls-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--gray-100);
+    }
+
+    .chart-type-tabs {
+      display: flex;
+      gap: 4px;
+      background: var(--gray-100);
+      padding: 3px;
+      border-radius: 9px;
+    }
+
+    .type-pill {
+      font-size: 0.74rem;
+      padding: 4px 8px;
+      border-radius: 7px;
+      border: none;
+      background: none;
+      color: var(--gray-600);
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .type-pill.active {
+      background: white;
+      color: var(--primary);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      font-weight: 700;
+    }
+
     .chart-filter-pills {
       display: flex;
       gap: 4px;
       background: var(--gray-100);
       padding: 3px;
-      border-radius: 10px;
+      border-radius: 9px;
     }
 
     .filter-pill {
       font-size: 0.74rem;
-      padding: 4px 9px;
+      padding: 4px 8px;
       border-radius: 7px;
       border: none;
       background: none;
@@ -642,20 +703,40 @@
 
     .filter-pill.active {
       background: white;
-      color: var(--speech-dark);
+      color: var(--gray-900);
       box-shadow: 0 1px 3px rgba(0,0,0,0.1);
       font-weight: 700;
+    }
+
+    .chart-legend-box {
+      display: flex;
+      gap: 14px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
     }
 
     .canvas-wrapper {
       position: relative;
       width: 100%;
-      height: 240px;
+      height: 250px;
     }
 
     canvas {
       width: 100% !important;
-      height: 240px !important;
+      height: 250px !important;
       display: block;
     }
 
@@ -761,6 +842,7 @@
     .pill-eating { background: var(--eating-bg); color: var(--eating-color); border: 1px solid var(--eating-border); }
     .pill-bath { background: var(--bath-bg); color: var(--bath-color); border: 1px solid var(--bath-border); }
     .pill-speech { background: var(--speech-bg); color: var(--speech-color); border: 1px solid var(--speech-border); font-weight: 700; }
+    .pill-absence { background: var(--absence-bg); color: var(--absence-color); border: 1px solid var(--absence-border); font-weight: 700; }
 
     .history-notes-box {
       background: #f8fafc;
@@ -856,14 +938,14 @@
       </div>
       <div class="badge-today" id="badge-today-str">今日記錄</div>
     </div>
-    <div class="header-subtitle">長輩健康照護日誌・日常自理與精神時長追蹤</div>
+    <div class="header-subtitle">長輩健康照護日誌・自理能力與精神時數追蹤</div>
   </header>
 
   <!-- Navigation Tabs -->
   <div class="nav-tabs">
     <button class="nav-tab-btn active" onclick="switchTab('form')">✏️ 每日填寫</button>
     <button class="nav-tab-btn" onclick="switchTab('history')">📋 歷史明細</button>
-    <button class="nav-tab-btn" onclick="switchTab('stats')">📈 講話時數曲線</button>
+    <button class="nav-tab-btn" onclick="switchTab('stats')">📈 趨勢曲線圖</button>
     <button class="nav-tab-btn" onclick="switchTab('settings')">⚙️ 匯出備份</button>
   </div>
 
@@ -936,55 +1018,103 @@
       </div>
     </div>
 
-    <!-- Category 3: 講話時數（拉桿式調整 0 ~ 24 小時） -->
+    <!-- Category 3: 講話時數（拉桿式 0 ~ 12 小時） -->
     <div class="category-card speech">
       <div class="category-header">
         <div class="category-title">
-          <span>🗣️</span> 可以講話的時數
+          <span>🗣️</span> 講話時數
         </div>
-        <div class="category-badge">拉桿調整 0 ~ 24 小時</div>
+        <div class="category-badge">拉桿 0 ~ 12 小時</div>
       </div>
       
-      <div class="slider-box">
+      <div class="slider-box speech-box">
         <div class="slider-display-row">
           <div>
             <span class="slider-val-large" id="speech-val-display">0.0</span>
             <span class="slider-val-unit">小時 (hr)</span>
           </div>
-          <span class="slider-status-tag" id="speech-status-tag">0 小時（未講話/注意力不足）</span>
+          <span class="slider-status-tag" id="speech-status-tag">0 小時（未開口說話）</span>
         </div>
 
         <div class="slider-control-row">
           <button type="button" class="btn-step" onclick="stepSpeechHours(-0.5)" title="減少 0.5 小時">－</button>
-          <input type="range" id="speech-hours-slider" class="slider-input" min="0" max="24" step="0.5" value="0" oninput="onSpeechSliderInput(this.value)">
+          <input type="range" id="speech-hours-slider" class="slider-input" min="0" max="12" step="0.5" value="0" oninput="onSpeechSliderInput(this.value)">
           <button type="button" class="btn-step" onclick="stepSpeechHours(0.5)" title="增加 0.5 小時">＋</button>
         </div>
 
         <div class="slider-ticks">
           <span>0h</span>
+          <span>2h</span>
           <span>4h</span>
+          <span>6h</span>
           <span>8h</span>
+          <span>10h</span>
           <span>12h</span>
-          <span>16h</span>
-          <span>20h</span>
-          <span>24h</span>
         </div>
 
         <!-- Quick hour presets -->
         <div class="quick-hour-presets">
-          <button type="button" class="btn-preset" onclick="setSpeechHours(0)">0h (未開口)</button>
+          <button type="button" class="btn-preset" onclick="setSpeechHours(0)">0h (未講話)</button>
           <button type="button" class="btn-preset" onclick="setSpeechHours(0.5)">0.5h</button>
           <button type="button" class="btn-preset" onclick="setSpeechHours(1)">1h</button>
-          <button type="button" class="btn-preset" onclick="setSpeechHours(3)">3h</button>
-          <button type="button" class="btn-preset" onclick="setSpeechHours(5)">5h</button>
+          <button type="button" class="btn-preset" onclick="setSpeechHours(2)">2h</button>
+          <button type="button" class="btn-preset" onclick="setSpeechHours(4)">4h</button>
+          <button type="button" class="btn-preset" onclick="setSpeechHours(6)">6h</button>
           <button type="button" class="btn-preset" onclick="setSpeechHours(8)">8h</button>
-          <button type="button" class="btn-preset" onclick="setSpeechHours(12)">12h</button>
-          <button type="button" class="btn-preset" onclick="setSpeechHours(24)">24h (整天)</button>
+          <button type="button" class="btn-preset" onclick="setSpeechHours(12)">12h (整天)</button>
         </div>
       </div>
     </div>
 
-    <!-- Category 4: 備註 -->
+    <!-- Category 4: 失神時數（拉桿式 0 ~ 12 小時） -->
+    <div class="category-card absence">
+      <div class="category-header">
+        <div class="category-title">
+          <span>🧠</span> 失神時數
+        </div>
+        <div class="category-badge">拉桿 0 ~ 12 小時</div>
+      </div>
+      
+      <div class="slider-box absence-box">
+        <div class="slider-display-row">
+          <div>
+            <span class="slider-val-large" id="absence-val-display">0.0</span>
+            <span class="slider-val-unit">小時 (hr)</span>
+          </div>
+          <span class="slider-status-tag" id="absence-status-tag">0 小時（精神集中/無明顯失神）</span>
+        </div>
+
+        <div class="slider-control-row">
+          <button type="button" class="btn-step" onclick="stepAbsenceHours(-0.5)" title="減少 0.5 小時">－</button>
+          <input type="range" id="absence-hours-slider" class="slider-input" min="0" max="12" step="0.5" value="0" oninput="onAbsenceSliderInput(this.value)">
+          <button type="button" class="btn-step" onclick="stepAbsenceHours(0.5)" title="增加 0.5 小時">＋</button>
+        </div>
+
+        <div class="slider-ticks">
+          <span>0h</span>
+          <span>2h</span>
+          <span>4h</span>
+          <span>6h</span>
+          <span>8h</span>
+          <span>10h</span>
+          <span>12h</span>
+        </div>
+
+        <!-- Quick hour presets -->
+        <div class="quick-hour-presets">
+          <button type="button" class="btn-preset" onclick="setAbsenceHours(0)">0h (無失神)</button>
+          <button type="button" class="btn-preset" onclick="setAbsenceHours(0.5)">0.5h</button>
+          <button type="button" class="btn-preset" onclick="setAbsenceHours(1)">1h</button>
+          <button type="button" class="btn-preset" onclick="setAbsenceHours(2)">2h</button>
+          <button type="button" class="btn-preset" onclick="setAbsenceHours(3)">3h</button>
+          <button type="button" class="btn-preset" onclick="setAbsenceHours(5)">5h</button>
+          <button type="button" class="btn-preset" onclick="setAbsenceHours(8)">8h</button>
+          <button type="button" class="btn-preset" onclick="setAbsenceHours(12)">12h</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Category 5: 備註 -->
     <div class="category-card notes">
       <div class="category-header">
         <div class="category-title">
@@ -992,12 +1122,13 @@
         </div>
         <div class="category-badge">文字記錄</div>
       </div>
-      <textarea id="notes-input" class="notes-textarea" placeholder="例：今天精神狀況好、食慾佳、下午有到公園散步 20 分鐘、晚上注意力較集中..."></textarea>
+      <textarea id="notes-input" class="notes-textarea" placeholder="例：今天精神狀況好、下午有到公園散步 20 分鐘、晚上偶有放空發呆狀況..."></textarea>
       <div class="quick-tags">
         <span class="quick-tag" onclick="appendTag('精神良好')">😊 精神良好</span>
         <span class="quick-tag" onclick="appendTag('食慾佳')">🍲 食慾佳</span>
-        <span class="quick-tag" onclick="appendTag('注意力集中')">🧠 注意力集中</span>
-        <span class="quick-tag" onclick="appendTag('注意力不足')">💤 注意力不足</span>
+        <span class="quick-tag" onclick="appendTag('注意力集中')">✨ 注意力集中</span>
+        <span class="quick-tag" onclick="appendTag('短暫放空')">💭 短暫放空</span>
+        <span class="quick-tag" onclick="appendTag('偶發失神')">💤 偶發失神</span>
         <span class="quick-tag" onclick="appendTag('外出散步')">🚶 外出散步</span>
         <span class="quick-tag" onclick="appendTag('準時服藥')">💊 準時服藥</span>
       </div>
@@ -1026,24 +1157,24 @@
   <div id="tab-stats" class="tab-content">
     <div class="stat-cards-grid">
       <div class="stat-card">
-        <div class="stat-card-title">總記錄天數</div>
-        <div class="stat-card-val" id="stat-total-days" style="color: var(--primary);">0</div>
-        <div class="stat-card-desc">累計健康紀錄</div>
-      </div>
-      <div class="stat-card">
         <div class="stat-card-title">近7天平均講話時數</div>
         <div class="stat-card-val" id="stat-avg-speech" style="color: var(--speech-dark);">-</div>
-        <div class="stat-card-desc">最高 24.0 小時</div>
+        <div class="stat-card-desc">0 ~ 12 小時</div>
       </div>
       <div class="stat-card">
-        <div class="stat-card-title">近30天平均講話時數</div>
+        <div class="stat-card-title">近7天平均失神時數</div>
+        <div class="stat-card-val" id="stat-avg-absence" style="color: var(--absence-dark);">-</div>
+        <div class="stat-card-desc">0 ~ 12 小時</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-title">近30天平均講話</div>
         <div class="stat-card-val" id="stat-avg-speech-30" style="color: var(--speech-color);">-</div>
         <div class="stat-card-desc">月度時長均值</div>
       </div>
       <div class="stat-card">
-        <div class="stat-card-title">單日最高講話時數</div>
-        <div class="stat-card-val" id="stat-max-speech" style="color: #059669;">-</div>
-        <div class="stat-card-desc">歷史單日最佳</div>
+        <div class="stat-card-title">近30天平均失神</div>
+        <div class="stat-card-val" id="stat-avg-absence-30" style="color: var(--absence-color);">-</div>
+        <div class="stat-card-desc">月度時長均值</div>
       </div>
     </div>
 
@@ -1051,13 +1182,35 @@
     <div class="chart-container">
       <div class="chart-header">
         <div class="chart-title">
-          <span>📈</span> 每日講話時數趨勢圖 (0 ~ 24 hr)
+          <span>📈</span> 每日時數趨勢圖 (0 ~ 12 hr)
         </div>
+      </div>
+
+      <!-- Controls: Series toggle & Date range -->
+      <div class="chart-controls-bar">
+        <div class="chart-type-tabs">
+          <button type="button" class="type-pill active" id="type-both" onclick="setChartType('both')">雙線對比</button>
+          <button type="button" class="type-pill" id="type-speech" onclick="setChartType('speech')">僅講話</button>
+          <button type="button" class="type-pill" id="type-absence" onclick="setChartType('absence')">僅失神</button>
+        </div>
+
         <div class="chart-filter-pills">
           <button type="button" class="filter-pill" id="filter-7" onclick="setChartRange(7)">近7天</button>
           <button type="button" class="filter-pill active" id="filter-14" onclick="setChartRange(14)">近14天</button>
           <button type="button" class="filter-pill" id="filter-30" onclick="setChartRange(30)">近30天</button>
           <button type="button" class="filter-pill" id="filter-all" onclick="setChartRange(0)">全部</button>
+        </div>
+      </div>
+
+      <!-- Legend -->
+      <div class="chart-legend-box" id="chart-legend-box">
+        <div class="legend-item" id="legend-speech">
+          <span class="legend-dot" style="background:var(--speech-color)"></span>
+          <span>🗣️ 講話時數</span>
+        </div>
+        <div class="legend-item" id="legend-absence">
+          <span class="legend-dot" style="background:var(--absence-color)"></span>
+          <span>🧠 失神時數</span>
         </div>
       </div>
       
@@ -1066,7 +1219,7 @@
       </div>
       
       <div style="font-size:0.78rem; color:var(--gray-600); margin-top:8px; text-align:right;">
-        * 天數增加時下標日期會自動智能縮放抽樣（避免重疊），專注呈現講話時長波動。
+        * 天數增加時下標日期會自動智能縮放（避免重疊），支援雙曲線對比以掌握精神與交流消長。
       </div>
     </div>
 
@@ -1075,9 +1228,9 @@
         💡 照護觀察指標參考
       </div>
       <div style="font-size:0.83rem; color:var(--gray-600); line-height:1.6;">
-        <b>講話時數：</b>0 ~ 24 小時（0h 常見於未開口說話、注意力嚴重渙散；大於 5h 代表表達意願與體力良好）。<br>
-        <b>吃飯自理：</b>3 分(筷子快) / 2 分(筷子慢) / 1 分(湯匙快) / 0 分(需餵食)。<br>
-        <b>洗澡自理：</b>2 分(沖澡及洗澡) / 1 分(沖澡) / 0 分(需全程協助)。
+        <b>講話時數：</b>0 ~ 12 小時（時數越高代表互動意願與表達力越佳）。<br>
+        <b>失神時數：</b>0 ~ 12 小時（放空、眼神呆滯、無回應或反應顯著遲鈍的時間）。<br>
+        <b>自理評分：</b>吃飯 1~3 分、洗澡 1~2 分。
       </div>
     </div>
   </div>
@@ -1103,12 +1256,12 @@
     </div>
 
     <div class="settings-group">
-      <div class="settings-title">🧪 示範資料（支援大天數壓力測試）</div>
+      <div class="settings-title">🧪 示範資料</div>
       <button class="btn-setting" onclick="loadSampleData(14)">
-        <span>✨</span> 載入 14 天示範資料
+        <span>✨</span> 載入 14 天示範資料（含講話與失神）
       </button>
       <button class="btn-setting" onclick="loadSampleData(60)">
-        <span>🚀</span> 載入 60 天示範資料（驗證長天數曲線圖）
+        <span>🚀</span> 載入 60 天示範資料（驗證長期曲線圖）
       </button>
     </div>
 
@@ -1145,13 +1298,15 @@
 
   const STORAGE_KEY = 'mom_health_records_v1';
 
-  // State
-  let chartRangeDays = 14; // Default to 14 days
+  // Chart state
+  let chartRangeDays = 14; // 7, 14, 30, 0(all)
+  let chartViewType = 'both'; // 'both', 'speech', 'absence'
 
   let currentSelection = {
     eating: null,
     bath: null,
-    speechHours: 0
+    speechHours: 0,
+    absenceHours: 0
   };
 
   // Get local date string YYYY-MM-DD
@@ -1183,20 +1338,29 @@
     }
   }
 
-  // Helper to extract speech hours safely from record
+  // Helper to extract speech hours safely from record (clamped 0 to 12)
   function extractSpeechHours(record) {
     if (!record) return 0;
     if (record.speechHours !== undefined && record.speechHours !== null) {
-      return Number(record.speechHours);
+      return Math.min(12, Math.max(0, Number(record.speechHours)));
     }
-    // Backward compatibility with previous 0~5 points
+    // Backward compatibility
     if (record.speech !== undefined && record.speech !== null) {
       const s = Number(record.speech);
-      if (s === 5) return 12; // 整天
-      if (s === 4) return 6;  // >5hr
-      if (s === 3) return 3;  // 1~5hr
-      if (s === 2) return 0.5; // 0~1hr
-      return 0; // 0, 1
+      if (s === 5) return 12;
+      if (s === 4) return 6;
+      if (s === 3) return 3;
+      if (s === 2) return 0.5;
+      return 0;
+    }
+    return 0;
+  }
+
+  // Helper to extract absence hours safely
+  function extractAbsenceHours(record) {
+    if (!record) return 0;
+    if (record.absenceHours !== undefined && record.absenceHours !== null) {
+      return Math.min(12, Math.max(0, Number(record.absenceHours)));
     }
     return 0;
   }
@@ -1250,9 +1414,9 @@
     if (radio) radio.checked = true;
   }
 
-  // Speech Slider Logic
+  // Speech Slider Logic (0 ~ 12 hr)
   function onSpeechSliderInput(val) {
-    const hours = Math.round(Number(val) * 2) / 2; // clamp to 0.5 step
+    const hours = Math.round(Number(val) * 2) / 2;
     currentSelection.speechHours = hours;
     updateSpeechUI(hours);
   }
@@ -1260,15 +1424,16 @@
   function stepSpeechHours(delta) {
     let next = (currentSelection.speechHours || 0) + delta;
     if (next < 0) next = 0;
-    if (next > 24) next = 24;
+    if (next > 12) next = 12;
     setSpeechHours(next);
   }
 
   function setSpeechHours(hours) {
-    currentSelection.speechHours = Number(hours);
+    const clamped = Math.min(12, Math.max(0, Number(hours)));
+    currentSelection.speechHours = clamped;
     const slider = document.getElementById('speech-hours-slider');
-    if (slider) slider.value = hours;
-    updateSpeechUI(hours);
+    if (slider) slider.value = clamped;
+    updateSpeechUI(clamped);
   }
 
   function updateSpeechUI(hours) {
@@ -1277,36 +1442,86 @@
 
     const tag = document.getElementById('speech-status-tag');
     if (hours === 0) {
-      tag.innerText = '0h（未開口說話/注意力不足）';
+      tag.innerText = '0h（整天未開口說話）';
       tag.style.color = '#dc2626';
       tag.style.borderColor = '#fca5a5';
       tag.style.background = '#fef2f2';
     } else if (hours <= 1) {
-      tag.innerText = `${num}h（簡短回答/少量開口）`;
+      tag.innerText = `${num}h（少量開口 / 簡短回應）`;
       tag.style.color = '#d97706';
       tag.style.borderColor = '#fde68a';
       tag.style.background = '#fffbeb';
-    } else if (hours < 5) {
-      tag.innerText = `${num}h（常態對話 1~5 hr）`;
+    } else if (hours <= 4) {
+      tag.innerText = `${num}h（常態對話 1~4 hr）`;
       tag.style.color = '#16a34a';
       tag.style.borderColor = '#86efac';
       tag.style.background = '#f0fdf4';
-    } else if (hours <= 12) {
-      tag.innerText = `${num}h（表達意願高/交流熱絡）`;
+    } else if (hours <= 8) {
+      tag.innerText = `${num}h（表達意願高 / 互動良好）`;
       tag.style.color = '#0284c7';
       tag.style.borderColor = '#bae6fd';
       tag.style.background = '#f0f9ff';
     } else {
-      tag.innerText = `${num}h（整天講話/精神充足）`;
+      tag.innerText = `${num}h（整天講話 / 精神健談）`;
       tag.style.color = '#7c3aed';
       tag.style.borderColor = '#ddd6fe';
       tag.style.background = '#f5f3ff';
     }
+  }
 
-    // Highlight preset button if exact match
-    document.querySelectorAll('.btn-preset').forEach(btn => {
-      btn.classList.remove('active');
-    });
+  // Absence Slider Logic (0 ~ 12 hr)
+  function onAbsenceSliderInput(val) {
+    const hours = Math.round(Number(val) * 2) / 2;
+    currentSelection.absenceHours = hours;
+    updateAbsenceUI(hours);
+  }
+
+  function stepAbsenceHours(delta) {
+    let next = (currentSelection.absenceHours || 0) + delta;
+    if (next < 0) next = 0;
+    if (next > 12) next = 12;
+    setAbsenceHours(next);
+  }
+
+  function setAbsenceHours(hours) {
+    const clamped = Math.min(12, Math.max(0, Number(hours)));
+    currentSelection.absenceHours = clamped;
+    const slider = document.getElementById('absence-hours-slider');
+    if (slider) slider.value = clamped;
+    updateAbsenceUI(clamped);
+  }
+
+  function updateAbsenceUI(hours) {
+    const num = Number(hours).toFixed(1);
+    document.getElementById('absence-val-display').innerText = num;
+
+    const tag = document.getElementById('absence-status-tag');
+    if (hours === 0) {
+      tag.innerText = '0h（精神集中 / 無明顯失神）';
+      tag.style.color = '#16a34a';
+      tag.style.borderColor = '#86efac';
+      tag.style.background = '#f0fdf4';
+    } else if (hours <= 1) {
+      tag.innerText = `${num}h（短暫放空 / 輕微發呆）`;
+      tag.style.color = '#7c3aed';
+      tag.style.borderColor = '#d8b4fe';
+      tag.style.background = '#faf5ff';
+    } else if (hours <= 3) {
+      tag.innerText = `${num}h（偶發失神 / 精神較疲倦）`;
+      tag.style.color = '#d97706';
+      tag.style.borderColor = '#fde68a';
+      tag.style.background = '#fffbeb';
+    } else if (hours <= 6) {
+      tag.innerText = `${num}h（頻繁失神 / 反應較遲緩）`;
+      tag.style.color = '#ea580c';
+      tag.style.borderColor = '#fed7aa';
+      tag.style.background = '#fff7ed';
+    } else {
+      tag.innerText = `${num}h（大部分時間處於失神狀態）`;
+      tag.style.color = '#dc2626';
+      tag.style.borderColor = '#fca5a5';
+      tag.style.background = '#fef2f2';
+    }
   }
 
   // Append quick tag to notes
@@ -1339,6 +1554,7 @@
       listEl.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
     });
     setSpeechHours(0);
+    setAbsenceHours(0);
     document.getElementById('notes-input').value = '';
 
     if (rec) {
@@ -1348,8 +1564,8 @@
       if (rec.bath !== undefined && rec.bath !== null) {
         setCategoryUI('bath', rec.bath);
       }
-      const sHours = extractSpeechHours(rec);
-      setSpeechHours(sHours);
+      setSpeechHours(extractSpeechHours(rec));
+      setAbsenceHours(extractAbsenceHours(rec));
 
       if (rec.notes) {
         document.getElementById('notes-input').value = rec.notes;
@@ -1394,6 +1610,7 @@
       eating: currentSelection.eating,
       bath: currentSelection.bath,
       speechHours: Number(currentSelection.speechHours || 0),
+      absenceHours: Number(currentSelection.absenceHours || 0),
       notes: notes,
       updatedAt: new Date().toISOString()
     };
@@ -1445,7 +1662,7 @@
       const eatingText = r.eating !== null && r.eating !== undefined ? `${r.eating}分: ${DEFINITIONS.eating[r.eating] || '自訂'}` : '未記錄';
       const bathText = r.bath !== null && r.bath !== undefined ? `${r.bath}分: ${DEFINITIONS.bath[r.bath] || '自訂'}` : '未記錄';
       const sHours = extractSpeechHours(r);
-      const speechText = `${sHours.toFixed(1)} 小時`;
+      const aHours = extractAbsenceHours(r);
 
       html += `
         <div class="history-card">
@@ -1469,7 +1686,11 @@
             </div>
             <div class="metric-badge-row">
               <span class="metric-label" style="color:var(--speech-color)">🗣️ 講話</span>
-              <span class="metric-value-pill pill-speech">${speechText}</span>
+              <span class="metric-value-pill pill-speech">${sHours.toFixed(1)} 小時</span>
+            </div>
+            <div class="metric-badge-row">
+              <span class="metric-label" style="color:var(--absence-color)">🧠 失神</span>
+              <span class="metric-value-pill pill-absence">${aHours.toFixed(1)} 小時</span>
             </div>
           </div>
           ${r.notes ? `<div class="history-notes-box"><b>備註：</b>${escapeHtml(r.notes)}</div>` : ''}
@@ -1503,7 +1724,30 @@
     }
   }
 
-  // Set Chart Range Filter
+  // Set Chart Type Toggle (both / speech / absence)
+  function setChartType(type) {
+    chartViewType = type;
+    document.querySelectorAll('.type-pill').forEach(btn => btn.classList.remove('active'));
+    document.getElementById(`type-${type}`).classList.add('active');
+
+    // Update legend visibility
+    const legSpeech = document.getElementById('legend-speech');
+    const legAbsence = document.getElementById('legend-absence');
+    if (type === 'both') {
+      legSpeech.style.display = 'flex';
+      legAbsence.style.display = 'flex';
+    } else if (type === 'speech') {
+      legSpeech.style.display = 'flex';
+      legAbsence.style.display = 'none';
+    } else {
+      legSpeech.style.display = 'none';
+      legAbsence.style.display = 'flex';
+    }
+
+    renderStats();
+  }
+
+  // Set Chart Range Filter (7, 14, 30, all)
   function setChartRange(days) {
     chartRangeDays = days;
     document.querySelectorAll('.filter-pill').forEach(btn => btn.classList.remove('active'));
@@ -1515,39 +1759,33 @@
     renderStats();
   }
 
-  // Render Stats & Speech Hours Chart
+  // Render Stats & Hours Chart
   function renderStats() {
     const records = getRecords();
     const dates = Object.keys(records).sort();
-    document.getElementById('stat-total-days').innerText = dates.length;
 
-    // Calculate averages & max
-    let sum7 = 0, count7 = 0;
-    let sum30 = 0, count30 = 0;
-    let maxSpeech = 0;
+    // Calculate averages
+    let sumSpeech7 = 0, sumAbsence7 = 0, count7 = 0;
+    let sumSpeech30 = 0, sumAbsence30 = 0, count30 = 0;
 
     const recent7 = dates.slice(-7);
     recent7.forEach(d => {
-      const h = extractSpeechHours(records[d]);
-      sum7 += h;
+      sumSpeech7 += extractSpeechHours(records[d]);
+      sumAbsence7 += extractAbsenceHours(records[d]);
       count7++;
     });
 
     const recent30 = dates.slice(-30);
     recent30.forEach(d => {
-      const h = extractSpeechHours(records[d]);
-      sum30 += h;
+      sumSpeech30 += extractSpeechHours(records[d]);
+      sumAbsence30 += extractAbsenceHours(records[d]);
       count30++;
     });
 
-    dates.forEach(d => {
-      const h = extractSpeechHours(records[d]);
-      if (h > maxSpeech) maxSpeech = h;
-    });
-
-    document.getElementById('stat-avg-speech').innerText = count7 ? (sum7 / count7).toFixed(1) + ' hr' : '-';
-    document.getElementById('stat-avg-speech-30').innerText = count30 ? (sum30 / count30).toFixed(1) + ' hr' : '-';
-    document.getElementById('stat-max-speech').innerText = dates.length ? maxSpeech.toFixed(1) + ' hr' : '-';
+    document.getElementById('stat-avg-speech').innerText = count7 ? (sumSpeech7 / count7).toFixed(1) + ' hr' : '-';
+    document.getElementById('stat-avg-absence').innerText = count7 ? (sumAbsence7 / count7).toFixed(1) + ' hr' : '-';
+    document.getElementById('stat-avg-speech-30').innerText = count30 ? (sumSpeech30 / count30).toFixed(1) + ' hr' : '-';
+    document.getElementById('stat-avg-absence-30').innerText = count30 ? (sumAbsence30 / count30).toFixed(1) + ' hr' : '-';
 
     // Filter dates based on selected range
     let chartDates = dates;
@@ -1555,11 +1793,11 @@
       chartDates = dates.slice(-chartRangeDays);
     }
 
-    drawSpeechHoursChart(chartDates, records);
+    drawHoursTrendChart(chartDates, records);
   }
 
-  // Dedicated Pure Canvas Speech Hours Chart with Dynamic Scaling
-  function drawSpeechHoursChart(chartDates, records) {
+  // Canvas Trend Chart (0 ~ 12 hr) with Dual Curve Support & Dynamic Scaling
+  function drawHoursTrendChart(chartDates, records) {
     const canvas = document.getElementById('trendChart');
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
@@ -1567,7 +1805,7 @@
     const wrapper = canvas.parentElement;
     const clientW = wrapper ? wrapper.clientWidth : 600;
     const width = Math.max(clientW, 320);
-    const height = 240;
+    const height = 250;
 
     // HiDPI support
     const dpr = window.devicePixelRatio || 1;
@@ -1590,9 +1828,9 @@
     const chartW = width - padding.left - padding.right;
     const chartH = height - padding.top - padding.bottom;
 
-    // Y Axis: Fixed 0 to 24 hours
-    const maxY = 24;
-    const yTicks = [0, 4, 8, 12, 16, 20, 24];
+    // Y Axis: Fixed 0 to 12 hours
+    const maxY = 12;
+    const yTicks = [0, 2, 4, 6, 8, 10, 12];
 
     // Draw background grid lines and Y-axis labels
     ctx.lineWidth = 1;
@@ -1616,64 +1854,77 @@
     const stepX = numPoints > 1 ? chartW / (numPoints - 1) : chartW / 2;
 
     // Compute Points
-    const points = [];
+    const speechPoints = [];
+    const absencePoints = [];
+
     chartDates.forEach((d, idx) => {
       const r = records[d];
-      const hours = extractSpeechHours(r);
+      const sH = extractSpeechHours(r);
+      const aH = extractAbsenceHours(r);
       const x = numPoints > 1 ? padding.left + idx * stepX : padding.left + chartW / 2;
-      const y = padding.top + chartH - (Math.min(hours, maxY) / maxY) * chartH;
-      points.push({ x, y, hours, date: d });
+
+      const yS = padding.top + chartH - (Math.min(sH, maxY) / maxY) * chartH;
+      const yA = padding.top + chartH - (Math.min(aH, maxY) / maxY) * chartH;
+
+      speechPoints.push({ x, y: yS, hours: sH, date: d });
+      absencePoints.push({ x, y: yA, hours: aH, date: d });
     });
 
-    // 1. Draw subtle green gradient area under speech line
-    if (points.length > 0) {
-      const grad = ctx.createLinearGradient(0, padding.top, 0, padding.top + chartH);
-      grad.addColorStop(0, 'rgba(22, 163, 74, 0.28)');
-      grad.addColorStop(1, 'rgba(22, 163, 74, 0.01)');
+    // Helper to draw a series
+    function renderSeries(pts, color, gradStart, isArea) {
+      if (pts.length === 0) return;
 
-      ctx.beginPath();
-      ctx.moveTo(points[0].x, padding.top + chartH);
-      points.forEach(pt => ctx.lineTo(pt.x, pt.y));
-      ctx.lineTo(points[points.length - 1].x, padding.top + chartH);
-      ctx.closePath();
-      ctx.fillStyle = grad;
-      ctx.fill();
-    }
+      // Area fill
+      if (isArea) {
+        const grad = ctx.createLinearGradient(0, padding.top, 0, padding.top + chartH);
+        grad.addColorStop(0, gradStart);
+        grad.addColorStop(1, 'rgba(255, 255, 255, 0.01)');
 
-    // 2. Draw Speech Hours Curve
-    ctx.strokeStyle = '#16a34a';
-    ctx.lineWidth = numPoints > 50 ? 2 : 2.8;
-    ctx.beginPath();
-    points.forEach((pt, idx) => {
-      if (idx === 0) ctx.moveTo(pt.x, pt.y);
-      else ctx.lineTo(pt.x, pt.y);
-    });
-    ctx.stroke();
-
-    // 3. Draw Points (auto-scale size based on total points)
-    if (numPoints <= 40) {
-      const dotRadius = numPoints <= 15 ? 4.5 : 3;
-      points.forEach(pt => {
-        ctx.fillStyle = '#ffffff';
         ctx.beginPath();
-        ctx.arc(pt.x, pt.y, dotRadius, 0, Math.PI * 2);
+        ctx.moveTo(pts[0].x, padding.top + chartH);
+        pts.forEach(p => ctx.lineTo(p.x, p.y));
+        ctx.lineTo(pts[pts.length - 1].x, padding.top + chartH);
+        ctx.closePath();
+        ctx.fillStyle = grad;
         ctx.fill();
-        ctx.strokeStyle = '#16a34a';
-        ctx.lineWidth = 2.2;
-        ctx.stroke();
+      }
 
-        // If <= 10 points, draw hour label right above dot
-        if (numPoints <= 10) {
-          ctx.fillStyle = '#15803d';
-          ctx.font = 'bold 10px sans-serif';
-          ctx.textAlign = 'center';
-          ctx.fillText(pt.hours + 'h', pt.x, pt.y - 7);
-        }
+      // Line
+      ctx.strokeStyle = color;
+      ctx.lineWidth = numPoints > 50 ? 1.8 : 2.6;
+      ctx.beginPath();
+      pts.forEach((p, idx) => {
+        if (idx === 0) ctx.moveTo(p.x, p.y);
+        else ctx.lineTo(p.x, p.y);
       });
+      ctx.stroke();
+
+      // Dots
+      if (numPoints <= 40) {
+        const dotRadius = numPoints <= 15 ? 4 : 2.8;
+        pts.forEach(p => {
+          ctx.fillStyle = '#ffffff';
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, dotRadius, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.strokeStyle = color;
+          ctx.lineWidth = 2.2;
+          ctx.stroke();
+        });
+      }
     }
 
-    // 4. Dynamic X-Axis Date Scaling (智慧跳格抽樣，防止天數多時重疊)
-    // Max readable labels allowed on screen
+    // Draw based on chartViewType
+    if (chartViewType === 'both') {
+      renderSeries(speechPoints, '#16a34a', 'rgba(22, 163, 74, 0.18)', true);
+      renderSeries(absencePoints, '#9333ea', 'rgba(147, 51, 234, 0.18)', true);
+    } else if (chartViewType === 'speech') {
+      renderSeries(speechPoints, '#16a34a', 'rgba(22, 163, 74, 0.28)', true);
+    } else if (chartViewType === 'absence') {
+      renderSeries(absencePoints, '#9333ea', 'rgba(147, 51, 234, 0.28)', true);
+    }
+
+    // Dynamic X-Axis Date Scaling
     const maxLabels = Math.min(10, Math.max(4, Math.floor(chartW / 60)));
     const sampleInterval = Math.max(1, Math.ceil(numPoints / maxLabels));
 
@@ -1681,17 +1932,15 @@
     ctx.font = '11px -apple-system, sans-serif';
     ctx.textAlign = 'center';
 
-    points.forEach((pt, idx) => {
+    speechPoints.forEach((pt, idx) => {
       const isFirst = idx === 0;
       const isLast = idx === numPoints - 1;
       const isSampled = idx % sampleInterval === 0;
 
-      // Draw label if matches sampling rule, and not too close to the last one
       if (isSampled || (isLast && (numPoints - 1) % sampleInterval > sampleInterval * 0.4)) {
-        const shortDate = pt.date.slice(5); // MM-DD
+        const shortDate = pt.date.slice(5);
         const yDate = height - padding.bottom + 18;
 
-        // Draw small tick mark
         ctx.strokeStyle = '#cbd5e1';
         ctx.lineWidth = 1;
         ctx.beginPath();
@@ -1714,11 +1963,12 @@
     }
 
     let csv = '﻿'; // UTF-8 BOM for Excel
-    csv += '日期,講話時數(小時),吃飯等級,吃飯描述,洗澡等級,洗澡描述,備註,最後更新時間\n';
+    csv += '日期,講話時數(小時),失神時數(小時),吃飯等級,吃飯描述,洗澡等級,洗澡描述,備註,最後更新時間\n';
 
     dates.forEach(d => {
       const r = records[d];
       const sHours = extractSpeechHours(r);
+      const aHours = extractAbsenceHours(r);
       const eScore = r.eating !== null && r.eating !== undefined ? r.eating : '';
       const eText = DEFINITIONS.eating[r.eating] || '';
       const bScore = r.bath !== null && r.bath !== undefined ? r.bath : '';
@@ -1726,7 +1976,7 @@
       const notes = (r.notes || '').replace(/"/g, '""');
       const updatedAt = r.updatedAt || '';
 
-      csv += `"${d}","${sHours}","${eScore}","${eText}","${bScore}","${bText}","${notes}","${updatedAt}"\n`;
+      csv += `"${d}","${sHours}","${aHours}","${eScore}","${eText}","${bScore}","${bText}","${notes}","${updatedAt}"\n`;
     });
 
     const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
@@ -1795,9 +2045,12 @@
       const day = String(d.getDate()).padStart(2, '0');
       const dStr = `${year}-${month}-${day}`;
 
-      // Simulate realistic fluctuation of speech hours (0 to 14 hours)
-      const baseHours = [1.5, 3.0, 5.5, 8.0, 4.0, 0.5, 0.0, 2.0, 6.0, 7.5, 3.5, 5.0, 9.0, 4.5];
-      const sHours = baseHours[i % baseHours.length];
+      // Simulate realistic fluctuation of speech & absence (0 to 12 hours)
+      const speechCycles = [2.0, 4.5, 6.0, 7.5, 3.5, 1.0, 0.0, 3.0, 5.0, 8.0, 4.0, 6.5, 9.0, 2.5];
+      const absenceCycles = [3.5, 1.5, 0.5, 0.0, 2.0, 5.0, 6.5, 3.0, 1.0, 0.5, 2.5, 1.0, 0.0, 4.0];
+
+      const sHours = speechCycles[i % speechCycles.length];
+      const aHours = absenceCycles[i % absenceCycles.length];
       const eChoice = [3, 3, 2, 3, 2, 3, 1][i % 7];
       const bChoice = [2, 2, 1, 2, 2, 1, 2][i % 7];
 
@@ -1806,7 +2059,8 @@
         eating: eChoice,
         bath: bChoice,
         speechHours: sHours,
-        notes: `日常記錄第 ${daysCount - i} 天：講話約 ${sHours} 小時，整體狀態平穩`,
+        absenceHours: aHours,
+        notes: `日常記錄第 ${daysCount - i} 天：講話 ${sHours}h，失神 ${aHours}h`,
         updatedAt: new Date().toISOString()
       };
     }
