@@ -16,6 +16,7 @@
       --bath-bg: #f0f9ff;
       --bath-border: #bae6fd;
       --speech-color: #16a34a;
+      --speech-dark: #15803d;
       --speech-bg: #f0fdf4;
       --speech-border: #bbf7d0;
       --gray-50: #f8fafc;
@@ -307,17 +308,158 @@
       font-weight: 700;
     }
 
-    .speech .option-item.selected {
-      background: var(--speech-bg);
-      border-color: var(--speech-color);
+    /* Speech Slider UI */
+    .slider-box {
+      background: #f0fdf4;
+      border: 1.5px solid #bbf7d0;
+      border-radius: 14px;
+      padding: 18px 16px 14px;
+      margin-top: 4px;
     }
-    .speech .option-item.selected .option-score {
-      background: var(--speech-color);
-      color: white;
+
+    .slider-display-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 12px;
     }
-    .speech .option-item.selected .option-text {
+
+    .slider-val-large {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--speech-dark);
+      font-feature-settings: "tnum";
+      line-height: 1;
+    }
+
+    .slider-val-unit {
+      font-size: 1rem;
+      font-weight: 600;
       color: var(--speech-color);
+      margin-left: 4px;
+    }
+
+    .slider-status-tag {
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 20px;
+      background: white;
+      border: 1px solid #86efac;
+      color: var(--speech-dark);
+    }
+
+    .slider-control-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .btn-step {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1.5px solid #86efac;
+      background: white;
+      color: var(--speech-dark);
+      font-size: 1.3rem;
       font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.15s;
+      flex-shrink: 0;
+    }
+
+    .btn-step:hover {
+      background: #dcfce7;
+      border-color: #4ade80;
+    }
+
+    .btn-step:active {
+      transform: scale(0.92);
+    }
+
+    .slider-input {
+      flex: 1;
+      -webkit-appearance: none;
+      width: 100%;
+      height: 10px;
+      border-radius: 5px;
+      background: #bbf7d0;
+      outline: none;
+      transition: background 0.2s;
+    }
+
+    .slider-input::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: #16a34a;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(22, 163, 74, 0.4);
+      border: 2.5px solid #ffffff;
+      transition: transform 0.1s;
+    }
+
+    .slider-input::-webkit-slider-thumb:active {
+      transform: scale(1.18);
+    }
+
+    .slider-input::-moz-range-thumb {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: #16a34a;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(22, 163, 74, 0.4);
+      border: 2.5px solid #ffffff;
+    }
+
+    .slider-ticks {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.72rem;
+      color: #65a30d;
+      font-weight: 600;
+      margin-top: 2px;
+      padding: 0 4px;
+    }
+
+    .quick-hour-presets {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px dashed #bbf7d0;
+    }
+
+    .btn-preset {
+      font-size: 0.78rem;
+      padding: 4px 10px;
+      border-radius: 8px;
+      border: 1px solid #86efac;
+      background: #ffffff;
+      color: var(--speech-dark);
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.15s;
+    }
+
+    .btn-preset:hover {
+      background: #dcfce7;
+    }
+
+    .btn-preset.active {
+      background: #16a34a;
+      color: white;
+      border-color: #16a34a;
     }
 
     /* Notes Textarea */
@@ -465,35 +607,55 @@
       justify-content: space-between;
       align-items: center;
       margin-bottom: 12px;
+      flex-wrap: wrap;
+      gap: 8px;
     }
 
     .chart-title {
       font-size: 1rem;
       font-weight: 700;
       color: var(--gray-800);
-    }
-
-    .chart-legend {
-      display: flex;
-      gap: 12px;
-      font-size: 0.78rem;
-    }
-
-    .legend-item {
       display: flex;
       align-items: center;
-      gap: 4px;
+      gap: 6px;
     }
 
-    .legend-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
+    .chart-filter-pills {
+      display: flex;
+      gap: 4px;
+      background: var(--gray-100);
+      padding: 3px;
+      border-radius: 10px;
+    }
+
+    .filter-pill {
+      font-size: 0.74rem;
+      padding: 4px 9px;
+      border-radius: 7px;
+      border: none;
+      background: none;
+      color: var(--gray-600);
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .filter-pill.active {
+      background: white;
+      color: var(--speech-dark);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      font-weight: 700;
+    }
+
+    .canvas-wrapper {
+      position: relative;
+      width: 100%;
+      height: 240px;
     }
 
     canvas {
       width: 100% !important;
-      height: 220px !important;
+      height: 240px !important;
       display: block;
     }
 
@@ -598,7 +760,7 @@
 
     .pill-eating { background: var(--eating-bg); color: var(--eating-color); border: 1px solid var(--eating-border); }
     .pill-bath { background: var(--bath-bg); color: var(--bath-color); border: 1px solid var(--bath-border); }
-    .pill-speech { background: var(--speech-bg); color: var(--speech-color); border: 1px solid var(--speech-border); }
+    .pill-speech { background: var(--speech-bg); color: var(--speech-color); border: 1px solid var(--speech-border); font-weight: 700; }
 
     .history-notes-box {
       background: #f8fafc;
@@ -694,14 +856,14 @@
       </div>
       <div class="badge-today" id="badge-today-str">今日記錄</div>
     </div>
-    <div class="header-subtitle">長輩健康照護日誌・日常自理能力追蹤</div>
+    <div class="header-subtitle">長輩健康照護日誌・日常自理與精神時長追蹤</div>
   </header>
 
   <!-- Navigation Tabs -->
   <div class="nav-tabs">
     <button class="nav-tab-btn active" onclick="switchTab('form')">✏️ 每日填寫</button>
     <button class="nav-tab-btn" onclick="switchTab('history')">📋 歷史明細</button>
-    <button class="nav-tab-btn" onclick="switchTab('stats')">📊 趨勢圖表</button>
+    <button class="nav-tab-btn" onclick="switchTab('stats')">📈 講話時數曲線</button>
     <button class="nav-tab-btn" onclick="switchTab('settings')">⚙️ 匯出備份</button>
   </div>
 
@@ -774,45 +936,51 @@
       </div>
     </div>
 
-    <!-- Category 3: 講話與精神專注 -->
+    <!-- Category 3: 講話時數（拉桿式調整 0 ~ 24 小時） -->
     <div class="category-card speech">
       <div class="category-header">
         <div class="category-title">
-          <span>🗣️</span> 講話與專注表現
+          <span>🗣️</span> 可以講話的時數
         </div>
-        <div class="category-badge">評分 0 ~ 5 分</div>
+        <div class="category-badge">拉桿調整 0 ~ 24 小時</div>
       </div>
-      <div class="option-list" id="speech-options">
-        <label class="option-item" onclick="selectOption('speech', 5, this)">
-          <input type="radio" name="speech" value="5">
-          <span class="option-score">5</span>
-          <span class="option-text">整天可講話</span>
-        </label>
-        <label class="option-item" onclick="selectOption('speech', 4, this)">
-          <input type="radio" name="speech" value="4">
-          <span class="option-score">4</span>
-          <span class="option-text">可講話大於 5 hr</span>
-        </label>
-        <label class="option-item" onclick="selectOption('speech', 3, this)">
-          <input type="radio" name="speech" value="3">
-          <span class="option-score">3</span>
-          <span class="option-text">可講話介於 1 與 5 hr</span>
-        </label>
-        <label class="option-item" onclick="selectOption('speech', 2, this)">
-          <input type="radio" name="speech" value="2">
-          <span class="option-score">2</span>
-          <span class="option-text">可講話介於 0 與 1 hr</span>
-        </label>
-        <label class="option-item" onclick="selectOption('speech', 1, this)">
-          <input type="radio" name="speech" value="1">
-          <span class="option-score">1</span>
-          <span class="option-text">無法講話</span>
-        </label>
-        <label class="option-item" onclick="selectOption('speech', 0, this)">
-          <input type="radio" name="speech" value="0">
-          <span class="option-score">0</span>
-          <span class="option-text">注意力不足</span>
-        </label>
+      
+      <div class="slider-box">
+        <div class="slider-display-row">
+          <div>
+            <span class="slider-val-large" id="speech-val-display">0.0</span>
+            <span class="slider-val-unit">小時 (hr)</span>
+          </div>
+          <span class="slider-status-tag" id="speech-status-tag">0 小時（未講話/注意力不足）</span>
+        </div>
+
+        <div class="slider-control-row">
+          <button type="button" class="btn-step" onclick="stepSpeechHours(-0.5)" title="減少 0.5 小時">－</button>
+          <input type="range" id="speech-hours-slider" class="slider-input" min="0" max="24" step="0.5" value="0" oninput="onSpeechSliderInput(this.value)">
+          <button type="button" class="btn-step" onclick="stepSpeechHours(0.5)" title="增加 0.5 小時">＋</button>
+        </div>
+
+        <div class="slider-ticks">
+          <span>0h</span>
+          <span>4h</span>
+          <span>8h</span>
+          <span>12h</span>
+          <span>16h</span>
+          <span>20h</span>
+          <span>24h</span>
+        </div>
+
+        <!-- Quick hour presets -->
+        <div class="quick-hour-presets">
+          <button type="button" class="btn-preset" onclick="setSpeechHours(0)">0h (未開口)</button>
+          <button type="button" class="btn-preset" onclick="setSpeechHours(0.5)">0.5h</button>
+          <button type="button" class="btn-preset" onclick="setSpeechHours(1)">1h</button>
+          <button type="button" class="btn-preset" onclick="setSpeechHours(3)">3h</button>
+          <button type="button" class="btn-preset" onclick="setSpeechHours(5)">5h</button>
+          <button type="button" class="btn-preset" onclick="setSpeechHours(8)">8h</button>
+          <button type="button" class="btn-preset" onclick="setSpeechHours(12)">12h</button>
+          <button type="button" class="btn-preset" onclick="setSpeechHours(24)">24h (整天)</button>
+        </div>
       </div>
     </div>
 
@@ -824,14 +992,14 @@
         </div>
         <div class="category-badge">文字記錄</div>
       </div>
-      <textarea id="notes-input" class="notes-textarea" placeholder="例：今天精神狀況好、食慾佳、血壓 125/80、下午有到公園散步 20 分鐘..."></textarea>
+      <textarea id="notes-input" class="notes-textarea" placeholder="例：今天精神狀況好、食慾佳、下午有到公園散步 20 分鐘、晚上注意力較集中..."></textarea>
       <div class="quick-tags">
         <span class="quick-tag" onclick="appendTag('精神良好')">😊 精神良好</span>
         <span class="quick-tag" onclick="appendTag('食慾佳')">🍲 食慾佳</span>
-        <span class="quick-tag" onclick="appendTag('有點疲倦')">😴 有點疲倦</span>
+        <span class="quick-tag" onclick="appendTag('注意力集中')">🧠 注意力集中</span>
+        <span class="quick-tag" onclick="appendTag('注意力不足')">💤 注意力不足</span>
         <span class="quick-tag" onclick="appendTag('外出散步')">🚶 外出散步</span>
         <span class="quick-tag" onclick="appendTag('準時服藥')">💊 準時服藥</span>
-        <span class="quick-tag" onclick="appendTag('情緒平穩')">🌱 情緒平穩</span>
       </div>
     </div>
 
@@ -863,43 +1031,53 @@
         <div class="stat-card-desc">累計健康紀錄</div>
       </div>
       <div class="stat-card">
-        <div class="stat-card-title">近7天吃飯均值</div>
-        <div class="stat-card-val" id="stat-avg-eating" style="color: var(--eating-color);">-</div>
-        <div class="stat-card-desc">滿分 3 分</div>
+        <div class="stat-card-title">近7天平均講話時數</div>
+        <div class="stat-card-val" id="stat-avg-speech" style="color: var(--speech-dark);">-</div>
+        <div class="stat-card-desc">最高 24.0 小時</div>
       </div>
       <div class="stat-card">
-        <div class="stat-card-title">近7天洗澡均值</div>
-        <div class="stat-card-val" id="stat-avg-bath" style="color: var(--bath-color);">-</div>
-        <div class="stat-card-desc">滿分 2 分</div>
+        <div class="stat-card-title">近30天平均講話時數</div>
+        <div class="stat-card-val" id="stat-avg-speech-30" style="color: var(--speech-color);">-</div>
+        <div class="stat-card-desc">月度時長均值</div>
       </div>
       <div class="stat-card">
-        <div class="stat-card-title">近7天講話均值</div>
-        <div class="stat-card-val" id="stat-avg-speech" style="color: var(--speech-color);">-</div>
-        <div class="stat-card-desc">滿分 5 分</div>
+        <div class="stat-card-title">單日最高講話時數</div>
+        <div class="stat-card-val" id="stat-max-speech" style="color: #059669;">-</div>
+        <div class="stat-card-desc">歷史單日最佳</div>
       </div>
     </div>
 
     <!-- Trend Chart -->
     <div class="chart-container">
       <div class="chart-header">
-        <div class="chart-title">📈 近期健康狀況變化趨勢</div>
-        <div class="chart-legend">
-          <div class="legend-item"><span class="legend-dot" style="background:var(--eating-color)"></span>吃飯</div>
-          <div class="legend-item"><span class="legend-dot" style="background:var(--bath-color)"></span>洗澡</div>
-          <div class="legend-item"><span class="legend-dot" style="background:var(--speech-color)"></span>講話</div>
+        <div class="chart-title">
+          <span>📈</span> 每日講話時數趨勢圖 (0 ~ 24 hr)
+        </div>
+        <div class="chart-filter-pills">
+          <button type="button" class="filter-pill" id="filter-7" onclick="setChartRange(7)">近7天</button>
+          <button type="button" class="filter-pill active" id="filter-14" onclick="setChartRange(14)">近14天</button>
+          <button type="button" class="filter-pill" id="filter-30" onclick="setChartRange(30)">近30天</button>
+          <button type="button" class="filter-pill" id="filter-all" onclick="setChartRange(0)">全部</button>
         </div>
       </div>
-      <canvas id="trendChart"></canvas>
+      
+      <div class="canvas-wrapper">
+        <canvas id="trendChart"></canvas>
+      </div>
+      
+      <div style="font-size:0.78rem; color:var(--gray-600); margin-top:8px; text-align:right;">
+        * 天數增加時下標日期會自動智能縮放抽樣（避免重疊），專注呈現講話時長波動。
+      </div>
     </div>
 
     <div class="category-card" style="margin-top:12px;">
       <div class="category-title" style="font-size:0.92rem; color:var(--gray-700); margin-bottom:8px;">
-        💡 評分標準參考指南
+        💡 照護觀察指標參考
       </div>
       <div style="font-size:0.83rem; color:var(--gray-600); line-height:1.6;">
-        <b>吃飯：</b>3 分(筷子快) / 2 分(筷子慢) / 1 分(湯匙快) / 0 分(需餵食)<br>
-        <b>洗澡：</b>2 分(沖澡及洗澡) / 1 分(沖澡) / 0 分(需全程協助)<br>
-        <b>講話：</b>5 分(整天) / 4 分(>5hr) / 3 分(1~5hr) / 2 分(0~1hr) / 1 分(無法講話) / 0 分(注意力不足)
+        <b>講話時數：</b>0 ~ 24 小時（0h 常見於未開口說話、注意力嚴重渙散；大於 5h 代表表達意願與體力良好）。<br>
+        <b>吃飯自理：</b>3 分(筷子快) / 2 分(筷子慢) / 1 分(湯匙快) / 0 分(需餵食)。<br>
+        <b>洗澡自理：</b>2 分(沖澡及洗澡) / 1 分(沖澡) / 0 分(需全程協助)。
       </div>
     </div>
   </div>
@@ -925,9 +1103,12 @@
     </div>
 
     <div class="settings-group">
-      <div class="settings-title">🧪 示範資料</div>
-      <button class="btn-setting" onclick="loadSampleData()">
-        <span>✨</span> 載入一週範例資料（供檢視圖表）
+      <div class="settings-title">🧪 示範資料（支援大天數壓力測試）</div>
+      <button class="btn-setting" onclick="loadSampleData(14)">
+        <span>✨</span> 載入 14 天示範資料
+      </button>
+      <button class="btn-setting" onclick="loadSampleData(60)">
+        <span>🚀</span> 載入 60 天示範資料（驗證長天數曲線圖）
       </button>
     </div>
 
@@ -959,18 +1140,19 @@
       2: '可自己沖澡及洗澡',
       1: '可自己沖澡',
       0: '需全程協助洗澡 / 擦澡'
-    },
-    speech: {
-      5: '整天可講話',
-      4: '可講話大於 5 hr',
-      3: '可講話介於 1 與 5 hr',
-      2: '可講話介於 0 與 1 hr',
-      1: '無法講話',
-      0: '注意力不足'
     }
   };
 
   const STORAGE_KEY = 'mom_health_records_v1';
+
+  // State
+  let chartRangeDays = 14; // Default to 14 days
+
+  let currentSelection = {
+    eating: null,
+    bath: null,
+    speechHours: 0
+  };
 
   // Get local date string YYYY-MM-DD
   function getTodayString() {
@@ -1001,12 +1183,23 @@
     }
   }
 
-  // Current Form State
-  let currentSelection = {
-    eating: null,
-    bath: null,
-    speech: null
-  };
+  // Helper to extract speech hours safely from record
+  function extractSpeechHours(record) {
+    if (!record) return 0;
+    if (record.speechHours !== undefined && record.speechHours !== null) {
+      return Number(record.speechHours);
+    }
+    // Backward compatibility with previous 0~5 points
+    if (record.speech !== undefined && record.speech !== null) {
+      const s = Number(record.speech);
+      if (s === 5) return 12; // 整天
+      if (s === 4) return 6;  // >5hr
+      if (s === 3) return 3;  // 1~5hr
+      if (s === 2) return 0.5; // 0~1hr
+      return 0; // 0, 1
+    }
+    return 0;
+  }
 
   // Switch Tabs
   function switchTab(tabName) {
@@ -1047,7 +1240,7 @@
     }, 2400);
   }
 
-  // Radio button click handling
+  // Radio button click handling for Eating and Bath
   function selectOption(category, score, itemEl) {
     currentSelection[category] = score;
     const parent = itemEl.parentElement;
@@ -1055,6 +1248,65 @@
     itemEl.classList.add('selected');
     const radio = itemEl.querySelector('input[type="radio"]');
     if (radio) radio.checked = true;
+  }
+
+  // Speech Slider Logic
+  function onSpeechSliderInput(val) {
+    const hours = Math.round(Number(val) * 2) / 2; // clamp to 0.5 step
+    currentSelection.speechHours = hours;
+    updateSpeechUI(hours);
+  }
+
+  function stepSpeechHours(delta) {
+    let next = (currentSelection.speechHours || 0) + delta;
+    if (next < 0) next = 0;
+    if (next > 24) next = 24;
+    setSpeechHours(next);
+  }
+
+  function setSpeechHours(hours) {
+    currentSelection.speechHours = Number(hours);
+    const slider = document.getElementById('speech-hours-slider');
+    if (slider) slider.value = hours;
+    updateSpeechUI(hours);
+  }
+
+  function updateSpeechUI(hours) {
+    const num = Number(hours).toFixed(1);
+    document.getElementById('speech-val-display').innerText = num;
+
+    const tag = document.getElementById('speech-status-tag');
+    if (hours === 0) {
+      tag.innerText = '0h（未開口說話/注意力不足）';
+      tag.style.color = '#dc2626';
+      tag.style.borderColor = '#fca5a5';
+      tag.style.background = '#fef2f2';
+    } else if (hours <= 1) {
+      tag.innerText = `${num}h（簡短回答/少量開口）`;
+      tag.style.color = '#d97706';
+      tag.style.borderColor = '#fde68a';
+      tag.style.background = '#fffbeb';
+    } else if (hours < 5) {
+      tag.innerText = `${num}h（常態對話 1~5 hr）`;
+      tag.style.color = '#16a34a';
+      tag.style.borderColor = '#86efac';
+      tag.style.background = '#f0fdf4';
+    } else if (hours <= 12) {
+      tag.innerText = `${num}h（表達意願高/交流熱絡）`;
+      tag.style.color = '#0284c7';
+      tag.style.borderColor = '#bae6fd';
+      tag.style.background = '#f0f9ff';
+    } else {
+      tag.innerText = `${num}h（整天講話/精神充足）`;
+      tag.style.color = '#7c3aed';
+      tag.style.borderColor = '#ddd6fe';
+      tag.style.background = '#f5f3ff';
+    }
+
+    // Highlight preset button if exact match
+    document.querySelectorAll('.btn-preset').forEach(btn => {
+      btn.classList.remove('active');
+    });
   }
 
   // Append quick tag to notes
@@ -1080,25 +1332,25 @@
     const rec = records[dateStr];
 
     // Reset UI
-    ['eating', 'bath', 'speech'].forEach(cat => {
+    ['eating', 'bath'].forEach(cat => {
       currentSelection[cat] = null;
       const listEl = document.getElementById(`${cat}-options`);
       listEl.querySelectorAll('.option-item').forEach(el => el.classList.remove('selected'));
       listEl.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
     });
+    setSpeechHours(0);
     document.getElementById('notes-input').value = '';
 
     if (rec) {
-      // Set values if already exists
       if (rec.eating !== undefined && rec.eating !== null) {
         setCategoryUI('eating', rec.eating);
       }
       if (rec.bath !== undefined && rec.bath !== null) {
         setCategoryUI('bath', rec.bath);
       }
-      if (rec.speech !== undefined && rec.speech !== null) {
-        setCategoryUI('speech', rec.speech);
-      }
+      const sHours = extractSpeechHours(rec);
+      setSpeechHours(sHours);
+
       if (rec.notes) {
         document.getElementById('notes-input').value = rec.notes;
       }
@@ -1125,11 +1377,10 @@
       return;
     }
 
-    if (currentSelection.eating === null || currentSelection.bath === null || currentSelection.speech === null) {
+    if (currentSelection.eating === null || currentSelection.bath === null) {
       const missing = [];
       if (currentSelection.eating === null) missing.push('吃飯');
       if (currentSelection.bath === null) missing.push('洗澡');
-      if (currentSelection.speech === null) missing.push('講話');
       if (!confirm(`您尚未選擇【${missing.join('、')}】的評分，確定仍要儲存嗎？`)) {
         return;
       }
@@ -1142,7 +1393,7 @@
       date: dateStr,
       eating: currentSelection.eating,
       bath: currentSelection.bath,
-      speech: currentSelection.speech,
+      speechHours: Number(currentSelection.speechHours || 0),
       notes: notes,
       updatedAt: new Date().toISOString()
     };
@@ -1193,7 +1444,8 @@
       const r = records[date];
       const eatingText = r.eating !== null && r.eating !== undefined ? `${r.eating}分: ${DEFINITIONS.eating[r.eating] || '自訂'}` : '未記錄';
       const bathText = r.bath !== null && r.bath !== undefined ? `${r.bath}分: ${DEFINITIONS.bath[r.bath] || '自訂'}` : '未記錄';
-      const speechText = r.speech !== null && r.speech !== undefined ? `${r.speech}分: ${DEFINITIONS.speech[r.speech] || '自訂'}` : '未記錄';
+      const sHours = extractSpeechHours(r);
+      const speechText = `${sHours.toFixed(1)} 小時`;
 
       html += `
         <div class="history-card">
@@ -1251,52 +1503,77 @@
     }
   }
 
-  // Render Stats & Canvas Chart
+  // Set Chart Range Filter
+  function setChartRange(days) {
+    chartRangeDays = days;
+    document.querySelectorAll('.filter-pill').forEach(btn => btn.classList.remove('active'));
+    if (days === 7) document.getElementById('filter-7').classList.add('active');
+    else if (days === 14) document.getElementById('filter-14').classList.add('active');
+    else if (days === 30) document.getElementById('filter-30').classList.add('active');
+    else document.getElementById('filter-all').classList.add('active');
+
+    renderStats();
+  }
+
+  // Render Stats & Speech Hours Chart
   function renderStats() {
     const records = getRecords();
     const dates = Object.keys(records).sort();
     document.getElementById('stat-total-days').innerText = dates.length;
 
-    // Calculate last 7 recorded days average
-    const recentDates = dates.slice(-7);
-    if (recentDates.length > 0) {
-      let sumE = 0, countE = 0;
-      let sumB = 0, countB = 0;
-      let sumS = 0, countS = 0;
+    // Calculate averages & max
+    let sum7 = 0, count7 = 0;
+    let sum30 = 0, count30 = 0;
+    let maxSpeech = 0;
 
-      recentDates.forEach(d => {
-        const r = records[d];
-        if (r.eating !== null && r.eating !== undefined) { sumE += Number(r.eating); countE++; }
-        if (r.bath !== null && r.bath !== undefined) { sumB += Number(r.bath); countB++; }
-        if (r.speech !== null && r.speech !== undefined) { sumS += Number(r.speech); countS++; }
-      });
+    const recent7 = dates.slice(-7);
+    recent7.forEach(d => {
+      const h = extractSpeechHours(records[d]);
+      sum7 += h;
+      count7++;
+    });
 
-      document.getElementById('stat-avg-eating').innerText = countE ? (sumE / countE).toFixed(1) : '-';
-      document.getElementById('stat-avg-bath').innerText = countB ? (sumB / countB).toFixed(1) : '-';
-      document.getElementById('stat-avg-speech').innerText = countS ? (sumS / countS).toFixed(1) : '-';
-    } else {
-      document.getElementById('stat-avg-eating').innerText = '-';
-      document.getElementById('stat-avg-bath').innerText = '-';
-      document.getElementById('stat-avg-speech').innerText = '-';
+    const recent30 = dates.slice(-30);
+    recent30.forEach(d => {
+      const h = extractSpeechHours(records[d]);
+      sum30 += h;
+      count30++;
+    });
+
+    dates.forEach(d => {
+      const h = extractSpeechHours(records[d]);
+      if (h > maxSpeech) maxSpeech = h;
+    });
+
+    document.getElementById('stat-avg-speech').innerText = count7 ? (sum7 / count7).toFixed(1) + ' hr' : '-';
+    document.getElementById('stat-avg-speech-30').innerText = count30 ? (sum30 / count30).toFixed(1) + ' hr' : '-';
+    document.getElementById('stat-max-speech').innerText = dates.length ? maxSpeech.toFixed(1) + ' hr' : '-';
+
+    // Filter dates based on selected range
+    let chartDates = dates;
+    if (chartRangeDays > 0) {
+      chartDates = dates.slice(-chartRangeDays);
     }
 
-    drawTrendChart(dates.slice(-14), records);
+    drawSpeechHoursChart(chartDates, records);
   }
 
-  // Pure Canvas Chart Implementation (Zero external dependency)
-  function drawTrendChart(chartDates, records) {
+  // Dedicated Pure Canvas Speech Hours Chart with Dynamic Scaling
+  function drawSpeechHoursChart(chartDates, records) {
     const canvas = document.getElementById('trendChart');
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
 
-    // Handle high DPI
-    const dpr = window.devicePixelRatio || 1;
-    const rect = canvas.getBoundingClientRect();
-    const width = rect.width || 600;
-    const height = 220;
+    const wrapper = canvas.parentElement;
+    const clientW = wrapper ? wrapper.clientWidth : 600;
+    const width = Math.max(clientW, 320);
+    const height = 240;
 
+    // HiDPI support
+    const dpr = window.devicePixelRatio || 1;
     canvas.width = width * dpr;
     canvas.height = height * dpr;
+    ctx.resetTransform ? ctx.resetTransform() : ctx.setTransform(1, 0, 0, 1, 0, 0);
     ctx.scale(dpr, dpr);
 
     ctx.clearRect(0, 0, width, height);
@@ -1305,92 +1582,125 @@
       ctx.fillStyle = '#94a3b8';
       ctx.font = '14px sans-serif';
       ctx.textAlign = 'center';
-      ctx.fillText('尚無足夠記錄可繪製趨勢圖', width / 2, height / 2);
+      ctx.fillText('尚無記錄可繪製曲線圖', width / 2, height / 2);
       return;
     }
 
-    const padding = { top: 25, right: 25, bottom: 35, left: 35 };
+    const padding = { top: 30, right: 25, bottom: 42, left: 45 };
     const chartW = width - padding.left - padding.right;
     const chartH = height - padding.top - padding.bottom;
 
-    // Y Axis: 0 to 5
-    const maxY = 5;
-    ctx.strokeStyle = '#e2e8f0';
+    // Y Axis: Fixed 0 to 24 hours
+    const maxY = 24;
+    const yTicks = [0, 4, 8, 12, 16, 20, 24];
+
+    // Draw background grid lines and Y-axis labels
     ctx.lineWidth = 1;
-    ctx.font = '11px sans-serif';
-    ctx.fillStyle = '#64748b';
+    ctx.font = '11px -apple-system, sans-serif';
     ctx.textAlign = 'right';
 
-    for (let y = 0; y <= maxY; y++) {
-      const yPos = padding.top + chartH - (y / maxY) * chartH;
+    yTicks.forEach(tick => {
+      const yPos = padding.top + chartH - (tick / maxY) * chartH;
+      
+      ctx.strokeStyle = tick === 0 ? '#cbd5e1' : '#f1f5f9';
       ctx.beginPath();
       ctx.moveTo(padding.left, yPos);
       ctx.lineTo(width - padding.right, yPos);
       ctx.stroke();
-      ctx.fillText(y + '分', padding.left - 6, yPos + 4);
-    }
 
-    // X Axis Points
+      ctx.fillStyle = tick === 0 ? '#475569' : '#94a3b8';
+      ctx.fillText(tick + 'h', padding.left - 8, yPos + 4);
+    });
+
     const numPoints = chartDates.length;
     const stepX = numPoints > 1 ? chartW / (numPoints - 1) : chartW / 2;
 
-    // Series definitions
-    const series = [
-      { key: 'eating', color: '#ea580c', values: [] },
-      { key: 'bath', color: '#0284c7', values: [] },
-      { key: 'speech', color: '#16a34a', values: [] }
-    ];
-
+    // Compute Points
+    const points = [];
     chartDates.forEach((d, idx) => {
       const r = records[d];
+      const hours = extractSpeechHours(r);
       const x = numPoints > 1 ? padding.left + idx * stepX : padding.left + chartW / 2;
-      series.forEach(s => {
-        s.values.push({
-          x: x,
-          y: r && r[s.key] !== null && r[s.key] !== undefined ? r[s.key] : null
-        });
-      });
-
-      // Draw date label on X axis
-      ctx.fillStyle = '#64748b';
-      ctx.textAlign = 'center';
-      const shortDate = d.slice(5); // MM-DD
-      ctx.fillText(shortDate, x, height - padding.bottom + 18);
+      const y = padding.top + chartH - (Math.min(hours, maxY) / maxY) * chartH;
+      points.push({ x, y, hours, date: d });
     });
 
-    // Draw lines and dots
-    series.forEach(s => {
-      ctx.strokeStyle = s.color;
-      ctx.lineWidth = 2.5;
+    // 1. Draw subtle green gradient area under speech line
+    if (points.length > 0) {
+      const grad = ctx.createLinearGradient(0, padding.top, 0, padding.top + chartH);
+      grad.addColorStop(0, 'rgba(22, 163, 74, 0.28)');
+      grad.addColorStop(1, 'rgba(22, 163, 74, 0.01)');
+
       ctx.beginPath();
-      let started = false;
+      ctx.moveTo(points[0].x, padding.top + chartH);
+      points.forEach(pt => ctx.lineTo(pt.x, pt.y));
+      ctx.lineTo(points[points.length - 1].x, padding.top + chartH);
+      ctx.closePath();
+      ctx.fillStyle = grad;
+      ctx.fill();
+    }
 
-      s.values.forEach(pt => {
-        if (pt.y !== null) {
-          const yPos = padding.top + chartH - (pt.y / maxY) * chartH;
-          if (!started) {
-            ctx.moveTo(pt.x, yPos);
-            started = true;
-          } else {
-            ctx.lineTo(pt.x, yPos);
-          }
+    // 2. Draw Speech Hours Curve
+    ctx.strokeStyle = '#16a34a';
+    ctx.lineWidth = numPoints > 50 ? 2 : 2.8;
+    ctx.beginPath();
+    points.forEach((pt, idx) => {
+      if (idx === 0) ctx.moveTo(pt.x, pt.y);
+      else ctx.lineTo(pt.x, pt.y);
+    });
+    ctx.stroke();
+
+    // 3. Draw Points (auto-scale size based on total points)
+    if (numPoints <= 40) {
+      const dotRadius = numPoints <= 15 ? 4.5 : 3;
+      points.forEach(pt => {
+        ctx.fillStyle = '#ffffff';
+        ctx.beginPath();
+        ctx.arc(pt.x, pt.y, dotRadius, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.strokeStyle = '#16a34a';
+        ctx.lineWidth = 2.2;
+        ctx.stroke();
+
+        // If <= 10 points, draw hour label right above dot
+        if (numPoints <= 10) {
+          ctx.fillStyle = '#15803d';
+          ctx.font = 'bold 10px sans-serif';
+          ctx.textAlign = 'center';
+          ctx.fillText(pt.hours + 'h', pt.x, pt.y - 7);
         }
       });
-      ctx.stroke();
+    }
 
-      // Draw point markers
-      s.values.forEach(pt => {
-        if (pt.y !== null) {
-          const yPos = padding.top + chartH - (pt.y / maxY) * chartH;
-          ctx.fillStyle = '#ffffff';
-          ctx.beginPath();
-          ctx.arc(pt.x, yPos, 4.5, 0, Math.PI * 2);
-          ctx.fill();
-          ctx.strokeStyle = s.color;
-          ctx.lineWidth = 2.5;
-          ctx.stroke();
-        }
-      });
+    // 4. Dynamic X-Axis Date Scaling (智慧跳格抽樣，防止天數多時重疊)
+    // Max readable labels allowed on screen
+    const maxLabels = Math.min(10, Math.max(4, Math.floor(chartW / 60)));
+    const sampleInterval = Math.max(1, Math.ceil(numPoints / maxLabels));
+
+    ctx.fillStyle = '#64748b';
+    ctx.font = '11px -apple-system, sans-serif';
+    ctx.textAlign = 'center';
+
+    points.forEach((pt, idx) => {
+      const isFirst = idx === 0;
+      const isLast = idx === numPoints - 1;
+      const isSampled = idx % sampleInterval === 0;
+
+      // Draw label if matches sampling rule, and not too close to the last one
+      if (isSampled || (isLast && (numPoints - 1) % sampleInterval > sampleInterval * 0.4)) {
+        const shortDate = pt.date.slice(5); // MM-DD
+        const yDate = height - padding.bottom + 18;
+
+        // Draw small tick mark
+        ctx.strokeStyle = '#cbd5e1';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(pt.x, padding.top + chartH);
+        ctx.lineTo(pt.x, padding.top + chartH + 4);
+        ctx.stroke();
+
+        ctx.fillText(shortDate, pt.x, yDate);
+      }
     });
   }
 
@@ -1404,20 +1714,19 @@
     }
 
     let csv = '﻿'; // UTF-8 BOM for Excel
-    csv += '日期,吃飯等級,吃飯描述,洗澡等級,洗澡描述,講話等級,講話描述,備註,最後更新時間\n';
+    csv += '日期,講話時數(小時),吃飯等級,吃飯描述,洗澡等級,洗澡描述,備註,最後更新時間\n';
 
     dates.forEach(d => {
       const r = records[d];
+      const sHours = extractSpeechHours(r);
       const eScore = r.eating !== null && r.eating !== undefined ? r.eating : '';
       const eText = DEFINITIONS.eating[r.eating] || '';
       const bScore = r.bath !== null && r.bath !== undefined ? r.bath : '';
       const bText = DEFINITIONS.bath[r.bath] || '';
-      const sScore = r.speech !== null && r.speech !== undefined ? r.speech : '';
-      const sText = DEFINITIONS.speech[r.speech] || '';
       const notes = (r.notes || '').replace(/"/g, '""');
       const updatedAt = r.updatedAt || '';
 
-      csv += `"${d}","${eScore}","${eText}","${bScore}","${bText}","${sScore}","${sText}","${notes}","${updatedAt}"\n`;
+      csv += `"${d}","${sHours}","${eScore}","${eText}","${bScore}","${bText}","${notes}","${updatedAt}"\n`;
     });
 
     const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
@@ -1472,13 +1781,13 @@
     event.target.value = '';
   }
 
-  // Load sample data for demonstration
-  function loadSampleData() {
-    if (!confirm('要載入最近 7 天的示範資料供檢視與測試嗎？')) return;
+  // Load sample data for demonstration (support 14 or 60 days)
+  function loadSampleData(daysCount = 14) {
+    if (!confirm(`要載入最近 ${daysCount} 天的示範資料供檢視與驗證曲線圖嗎？`)) return;
 
     const sample = {};
     const today = new Date();
-    for (let i = 6; i >= 0; i--) {
+    for (let i = daysCount - 1; i >= 0; i--) {
       const d = new Date(today);
       d.setDate(d.getDate() - i);
       const year = d.getFullYear();
@@ -1486,25 +1795,18 @@
       const day = String(d.getDate()).padStart(2, '0');
       const dStr = `${year}-${month}-${day}`;
 
-      const eChoice = [3, 3, 2, 3, 2, 3, 3][6 - i];
-      const bChoice = [2, 2, 1, 2, 2, 2, 2][6 - i];
-      const sChoice = [5, 4, 3, 4, 2, 5, 0][6 - i];
-      const sampleNotes = [
-        '精神很好，午餐吃得很香',
-        '自己拿筷子吃完一整碗麵，有到客廳走動',
-        '稍微有點累，洗澡時幫忙提醒步驟',
-        '與鄰居阿姨聊天很有活力，說話順暢',
-        '下午下雨在房間休息，食慾正常',
-        '天氣好，早上去庭院曬太陽20分鐘',
-        '今天精神較差，注意力較不集中'
-      ][6 - i];
+      // Simulate realistic fluctuation of speech hours (0 to 14 hours)
+      const baseHours = [1.5, 3.0, 5.5, 8.0, 4.0, 0.5, 0.0, 2.0, 6.0, 7.5, 3.5, 5.0, 9.0, 4.5];
+      const sHours = baseHours[i % baseHours.length];
+      const eChoice = [3, 3, 2, 3, 2, 3, 1][i % 7];
+      const bChoice = [2, 2, 1, 2, 2, 1, 2][i % 7];
 
       sample[dStr] = {
         date: dStr,
         eating: eChoice,
         bath: bChoice,
-        speech: sChoice,
-        notes: sampleNotes,
+        speechHours: sHours,
+        notes: `日常記錄第 ${daysCount - i} 天：講話約 ${sHours} 小時，整體狀態平穩`,
         updatedAt: new Date().toISOString()
       };
     }
@@ -1512,7 +1814,7 @@
     const current = getRecords();
     const merged = { ...current, ...sample };
     saveRecords(merged);
-    showToast('已成功載入示範資料！', '✨');
+    showToast(`已成功載入 ${daysCount} 天示範資料！`, '✨');
     onDateChange();
     renderHistory();
     renderStats();
