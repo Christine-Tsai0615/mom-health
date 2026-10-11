@@ -19,6 +19,14 @@
       --speech-dark: #15803d;
       --speech-bg: #f0fdf4;
       --speech-border: #bbf7d0;
+      --focus-color: #d97706;
+      --focus-dark: #b45309;
+      --focus-bg: #fffbeb;
+      --focus-border: #fde68a;
+      --total-color: #4f46e5;
+      --total-dark: #3730a3;
+      --total-bg: #eef2ff;
+      --total-border: #c7d2fe;
       --absence-color: #9333ea;
       --absence-dark: #7e22ce;
       --absence-bg: #faf5ff;
@@ -232,6 +240,9 @@
     .category-card.speech .category-title { color: var(--speech-color); }
     .category-card.speech .category-badge { background: var(--speech-bg); color: var(--speech-color); border: 1px solid var(--speech-border); }
 
+    .category-card.focus .category-title { color: var(--focus-color); }
+    .category-card.focus .category-badge { background: var(--focus-bg); color: var(--focus-color); border: 1px solid var(--focus-border); }
+
     .category-card.absence .category-title { color: var(--absence-color); }
     .category-card.absence .category-badge { background: var(--absence-bg); color: var(--absence-color); border: 1px solid var(--absence-border); }
 
@@ -327,6 +338,11 @@
       border: 1.5px solid #bbf7d0;
     }
 
+    .slider-box.focus-box {
+      background: #fffbeb;
+      border: 1.5px solid #fde68a;
+    }
+
     .slider-box.absence-box {
       background: #faf5ff;
       border: 1.5px solid #e9d5ff;
@@ -347,6 +363,7 @@
     }
 
     .speech-box .slider-val-large { color: var(--speech-dark); }
+    .focus-box .slider-val-large { color: var(--focus-dark); }
     .absence-box .slider-val-large { color: var(--absence-dark); }
 
     .slider-val-unit {
@@ -356,6 +373,7 @@
     }
 
     .speech-box .slider-val-unit { color: var(--speech-color); }
+    .focus-box .slider-val-unit { color: var(--focus-color); }
     .absence-box .slider-val-unit { color: var(--absence-color); }
 
     .slider-status-tag {
@@ -395,6 +413,12 @@
     }
     .speech-box .btn-step:hover { background: #dcfce7; }
 
+    .focus-box .btn-step {
+      border: 1.5px solid #fcd34d;
+      color: var(--focus-dark);
+    }
+    .focus-box .btn-step:hover { background: #fef3c7; }
+
     .absence-box .btn-step {
       border: 1.5px solid #d8b4fe;
       color: var(--absence-dark);
@@ -414,6 +438,7 @@
     }
 
     .speech-box .slider-input { background: #bbf7d0; }
+    .focus-box .slider-input { background: #fde68a; }
     .absence-box .slider-input { background: #e9d5ff; }
 
     .speech-box .slider-input::-webkit-slider-thumb {
@@ -425,6 +450,18 @@
       background: #16a34a;
       cursor: pointer;
       box-shadow: 0 2px 6px rgba(22, 163, 74, 0.4);
+      border: 2.5px solid #ffffff;
+    }
+
+    .focus-box .slider-input::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      background: #d97706;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(217, 119, 6, 0.4);
       border: 2.5px solid #ffffff;
     }
 
@@ -450,6 +487,7 @@
     }
 
     .speech-box .slider-ticks { color: #65a30d; }
+    .focus-box .slider-ticks { color: #d97706; }
     .absence-box .slider-ticks { color: #9333ea; }
 
     .quick-hour-presets {
@@ -461,6 +499,7 @@
     }
 
     .speech-box .quick-hour-presets { border-top: 1px dashed #bbf7d0; }
+    .focus-box .quick-hour-presets { border-top: 1px dashed #fde68a; }
     .absence-box .quick-hour-presets { border-top: 1px dashed #e9d5ff; }
 
     .btn-preset {
@@ -478,6 +517,12 @@
       color: var(--speech-dark);
     }
     .speech-box .btn-preset:hover { background: #dcfce7; }
+
+    .focus-box .btn-preset {
+      border: 1px solid #fcd34d;
+      color: var(--focus-dark);
+    }
+    .focus-box .btn-preset:hover { background: #fef3c7; }
 
     .absence-box .btn-preset {
       border: 1px solid #d8b4fe;
@@ -710,7 +755,8 @@
 
     .chart-legend-box {
       display: flex;
-      gap: 14px;
+      flex-wrap: wrap;
+      gap: 12px;
       font-size: 0.78rem;
       font-weight: 600;
       margin-bottom: 8px;
@@ -825,7 +871,7 @@
     }
 
     .metric-label {
-      width: 52px;
+      width: 58px;
       font-weight: 700;
       flex-shrink: 0;
     }
@@ -842,6 +888,8 @@
     .pill-eating { background: var(--eating-bg); color: var(--eating-color); border: 1px solid var(--eating-border); }
     .pill-bath { background: var(--bath-bg); color: var(--bath-color); border: 1px solid var(--bath-border); }
     .pill-speech { background: var(--speech-bg); color: var(--speech-color); border: 1px solid var(--speech-border); font-weight: 700; }
+    .pill-focus { background: var(--focus-bg); color: var(--focus-color); border: 1px solid var(--focus-border); font-weight: 700; }
+    .pill-total { background: var(--total-bg); color: var(--total-color); border: 1px solid var(--total-border); font-weight: 800; }
     .pill-absence { background: var(--absence-bg); color: var(--absence-color); border: 1px solid var(--absence-border); font-weight: 700; }
 
     .history-notes-box {
@@ -938,14 +986,14 @@
       </div>
       <div class="badge-today" id="badge-today-str">今日記錄</div>
     </div>
-    <div class="header-subtitle">長輩健康照護日誌・自理能力與精神時數追蹤</div>
+    <div class="header-subtitle">長輩健康照護日誌・自理能力與專注時長追蹤</div>
   </header>
 
   <!-- Navigation Tabs -->
   <div class="nav-tabs">
     <button class="nav-tab-btn active" onclick="switchTab('form')">✏️ 每日填寫</button>
     <button class="nav-tab-btn" onclick="switchTab('history')">📋 歷史明細</button>
-    <button class="nav-tab-btn" onclick="switchTab('stats')">📈 趨勢曲線圖</button>
+    <button class="nav-tab-btn" onclick="switchTab('stats')">📈 綜合趨勢圖</button>
     <button class="nav-tab-btn" onclick="switchTab('settings')">⚙️ 匯出備份</button>
   </div>
 
@@ -1066,7 +1114,52 @@
       </div>
     </div>
 
-    <!-- Category 4: 失神時數（拉桿式 0 ~ 12 小時） -->
+    <!-- Category 4: 專注力分數（拉桿式 0 ~ 10 分） -->
+    <div class="category-card focus">
+      <div class="category-header">
+        <div class="category-title">
+          <span>🎯</span> 專注力分數
+        </div>
+        <div class="category-badge">評分 0 ~ 10 分</div>
+      </div>
+      
+      <div class="slider-box focus-box">
+        <div class="slider-display-row">
+          <div>
+            <span class="slider-val-large" id="focus-val-display">5</span>
+            <span class="slider-val-unit">分 (pts)</span>
+          </div>
+          <span class="slider-status-tag" id="focus-status-tag">5 分（一般 / 能維持基本應答）</span>
+        </div>
+
+        <div class="slider-control-row">
+          <button type="button" class="btn-step" onclick="stepFocusScore(-1)" title="減少 1 分">－</button>
+          <input type="range" id="focus-score-slider" class="slider-input" min="0" max="10" step="1" value="5" oninput="onFocusSliderInput(this.value)">
+          <button type="button" class="btn-step" onclick="stepFocusScore(1)" title="增加 1 分">＋</button>
+        </div>
+
+        <div class="slider-ticks">
+          <span>0分</span>
+          <span>2分</span>
+          <span>4分</span>
+          <span>6分</span>
+          <span>8分</span>
+          <span>10分</span>
+        </div>
+
+        <!-- Quick score presets -->
+        <div class="quick-hour-presets">
+          <button type="button" class="btn-preset" onclick="setFocusScore(0)">0分 (極差)</button>
+          <button type="button" class="btn-preset" onclick="setFocusScore(2)">2分 (渙散)</button>
+          <button type="button" class="btn-preset" onclick="setFocusScore(4)">4分 (稍差)</button>
+          <button type="button" class="btn-preset" onclick="setFocusScore(6)">6分 (普通)</button>
+          <button type="button" class="btn-preset" onclick="setFocusScore(8)">8分 (良好)</button>
+          <button type="button" class="btn-preset" onclick="setFocusScore(10)">10分 (極佳)</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Category 5: 失神時數（拉桿式 0 ~ 12 小時） -->
     <div class="category-card absence">
       <div class="category-header">
         <div class="category-title">
@@ -1114,7 +1207,7 @@
       </div>
     </div>
 
-    <!-- Category 5: 備註 -->
+    <!-- Category 6: 備註 -->
     <div class="category-card notes">
       <div class="category-header">
         <div class="category-title">
@@ -1122,13 +1215,13 @@
         </div>
         <div class="category-badge">文字記錄</div>
       </div>
-      <textarea id="notes-input" class="notes-textarea" placeholder="例：今天精神狀況好、下午有到公園散步 20 分鐘、晚上偶有放空發呆狀況..."></textarea>
+      <textarea id="notes-input" class="notes-textarea" placeholder="例：今天精神狀況好、專注力佳、下午有到公園散步 20 分鐘、晚上偶有放空發呆狀況..."></textarea>
       <div class="quick-tags">
         <span class="quick-tag" onclick="appendTag('精神良好')">😊 精神良好</span>
         <span class="quick-tag" onclick="appendTag('食慾佳')">🍲 食慾佳</span>
-        <span class="quick-tag" onclick="appendTag('注意力集中')">✨ 注意力集中</span>
+        <span class="quick-tag" onclick="appendTag('專注力高')">🎯 專注力高</span>
+        <span class="quick-tag" onclick="appendTag('注意力渙散')">💤 注意力渙散</span>
         <span class="quick-tag" onclick="appendTag('短暫放空')">💭 短暫放空</span>
-        <span class="quick-tag" onclick="appendTag('偶發失神')">💤 偶發失神</span>
         <span class="quick-tag" onclick="appendTag('外出散步')">🚶 外出散步</span>
         <span class="quick-tag" onclick="appendTag('準時服藥')">💊 準時服藥</span>
       </div>
@@ -1157,24 +1250,24 @@
   <div id="tab-stats" class="tab-content">
     <div class="stat-cards-grid">
       <div class="stat-card">
+        <div class="stat-card-title">近7天加總綜合分</div>
+        <div class="stat-card-val" id="stat-avg-total" style="color: var(--total-dark);">-</div>
+        <div class="stat-card-desc">講話(12h) + 專注(10分) = 滿分22</div>
+      </div>
+      <div class="stat-card">
         <div class="stat-card-title">近7天平均講話時數</div>
         <div class="stat-card-val" id="stat-avg-speech" style="color: var(--speech-dark);">-</div>
-        <div class="stat-card-desc">0 ~ 12 小時</div>
+        <div class="stat-card-desc">最高 12.0 小時</div>
       </div>
       <div class="stat-card">
-        <div class="stat-card-title">近7天平均失神時數</div>
-        <div class="stat-card-val" id="stat-avg-absence" style="color: var(--absence-dark);">-</div>
-        <div class="stat-card-desc">0 ~ 12 小時</div>
+        <div class="stat-card-title">近7天平均專注力</div>
+        <div class="stat-card-val" id="stat-avg-focus" style="color: var(--focus-dark);">-</div>
+        <div class="stat-card-desc">最高 10.0 分</div>
       </div>
       <div class="stat-card">
-        <div class="stat-card-title">近30天平均講話</div>
-        <div class="stat-card-val" id="stat-avg-speech-30" style="color: var(--speech-color);">-</div>
-        <div class="stat-card-desc">月度時長均值</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-card-title">近30天平均失神</div>
-        <div class="stat-card-val" id="stat-avg-absence-30" style="color: var(--absence-color);">-</div>
-        <div class="stat-card-desc">月度時長均值</div>
+        <div class="stat-card-title">近30天加總綜合分</div>
+        <div class="stat-card-val" id="stat-avg-total-30" style="color: var(--primary);">-</div>
+        <div class="stat-card-desc">月度綜合均值</div>
       </div>
     </div>
 
@@ -1182,16 +1275,17 @@
     <div class="chart-container">
       <div class="chart-header">
         <div class="chart-title">
-          <span>📈</span> 每日時數趨勢圖 (0 ~ 12 hr)
+          <span>📈</span> 講話與專注力趨勢走勢圖
         </div>
       </div>
 
       <!-- Controls: Series toggle & Date range -->
       <div class="chart-controls-bar">
         <div class="chart-type-tabs">
-          <button type="button" class="type-pill active" id="type-both" onclick="setChartType('both')">雙線對比</button>
+          <button type="button" class="type-pill active" id="type-all" onclick="setChartType('all')">三線全覽</button>
+          <button type="button" class="type-pill" id="type-total" onclick="setChartType('total')">僅加總分</button>
           <button type="button" class="type-pill" id="type-speech" onclick="setChartType('speech')">僅講話</button>
-          <button type="button" class="type-pill" id="type-absence" onclick="setChartType('absence')">僅失神</button>
+          <button type="button" class="type-pill" id="type-focus" onclick="setChartType('focus')">僅專注力</button>
         </div>
 
         <div class="chart-filter-pills">
@@ -1204,13 +1298,17 @@
 
       <!-- Legend -->
       <div class="chart-legend-box" id="chart-legend-box">
+        <div class="legend-item" id="legend-total">
+          <span class="legend-dot" style="background:var(--total-color)"></span>
+          <span>🌟 加總綜合分 (講話 + 專注力，最高22)</span>
+        </div>
         <div class="legend-item" id="legend-speech">
           <span class="legend-dot" style="background:var(--speech-color)"></span>
-          <span>🗣️ 講話時數</span>
+          <span>🗣️ 講話時數 (0~12h)</span>
         </div>
-        <div class="legend-item" id="legend-absence">
-          <span class="legend-dot" style="background:var(--absence-color)"></span>
-          <span>🧠 失神時數</span>
+        <div class="legend-item" id="legend-focus">
+          <span class="legend-dot" style="background:var(--focus-color)"></span>
+          <span>🎯 專注力分數 (0~10分)</span>
         </div>
       </div>
       
@@ -1219,18 +1317,18 @@
       </div>
       
       <div style="font-size:0.78rem; color:var(--gray-600); margin-top:8px; text-align:right;">
-        * 天數增加時下標日期會自動智能縮放（避免重疊），支援雙曲線對比以掌握精神與交流消長。
+        * 圖表鎖定呈現「講話時數」、「專注力分數」與「兩者相加總分」，天數多時自動智慧縮放下標。
       </div>
     </div>
 
     <div class="category-card" style="margin-top:12px;">
       <div class="category-title" style="font-size:0.92rem; color:var(--gray-700); margin-bottom:8px;">
-        💡 照護觀察指標參考
+        💡 評分指標參考說明
       </div>
       <div style="font-size:0.83rem; color:var(--gray-600); line-height:1.6;">
-        <b>講話時數：</b>0 ~ 12 小時（時數越高代表互動意願與表達力越佳）。<br>
-        <b>失神時數：</b>0 ~ 12 小時（放空、眼神呆滯、無回應或反應顯著遲鈍的時間）。<br>
-        <b>自理評分：</b>吃飯 1~3 分、洗澡 1~2 分。
+        <b>講話時數：</b>0 ~ 12 小時（口語表達時間）。<br>
+        <b>專注力分數：</b>0 ~ 10 分（0分極差渙散、5分普通能應答、10分極佳專注）。<br>
+        <b>加總綜合分：</b>講話時數 + 專注力分數（最高 22 分），全方位反映長輩每日認知與精神活力。
       </div>
     </div>
   </div>
@@ -1258,10 +1356,10 @@
     <div class="settings-group">
       <div class="settings-title">🧪 示範資料</div>
       <button class="btn-setting" onclick="loadSampleData(14)">
-        <span>✨</span> 載入 14 天示範資料（含講話與失神）
+        <span>✨</span> 載入 14 天示範資料（含專注力與加總）
       </button>
       <button class="btn-setting" onclick="loadSampleData(60)">
-        <span>🚀</span> 載入 60 天示範資料（驗證長期曲線圖）
+        <span>🚀</span> 載入 60 天示範資料（驗證長期三線圖）
       </button>
     </div>
 
@@ -1300,12 +1398,13 @@
 
   // Chart state
   let chartRangeDays = 14; // 7, 14, 30, 0(all)
-  let chartViewType = 'both'; // 'both', 'speech', 'absence'
+  let chartViewType = 'all'; // 'all', 'total', 'speech', 'focus'
 
   let currentSelection = {
     eating: null,
     bath: null,
     speechHours: 0,
+    focusScore: 5,
     absenceHours: 0
   };
 
@@ -1338,13 +1437,12 @@
     }
   }
 
-  // Helper to extract speech hours safely from record (clamped 0 to 12)
+  // Safe extractors
   function extractSpeechHours(record) {
     if (!record) return 0;
     if (record.speechHours !== undefined && record.speechHours !== null) {
       return Math.min(12, Math.max(0, Number(record.speechHours)));
     }
-    // Backward compatibility
     if (record.speech !== undefined && record.speech !== null) {
       const s = Number(record.speech);
       if (s === 5) return 12;
@@ -1356,7 +1454,14 @@
     return 0;
   }
 
-  // Helper to extract absence hours safely
+  function extractFocusScore(record) {
+    if (!record) return 5;
+    if (record.focusScore !== undefined && record.focusScore !== null) {
+      return Math.min(10, Math.max(0, Number(record.focusScore)));
+    }
+    return 5; // Default fallback
+  }
+
   function extractAbsenceHours(record) {
     if (!record) return 0;
     if (record.absenceHours !== undefined && record.absenceHours !== null) {
@@ -1469,6 +1574,64 @@
     }
   }
 
+  // Focus Score Slider Logic (0 ~ 10 分)
+  function onFocusSliderInput(val) {
+    const score = Math.round(Number(val));
+    currentSelection.focusScore = score;
+    updateFocusUI(score);
+  }
+
+  function stepFocusScore(delta) {
+    let next = (currentSelection.focusScore ?? 5) + delta;
+    if (next < 0) next = 0;
+    if (next > 10) next = 10;
+    setFocusScore(next);
+  }
+
+  function setFocusScore(score) {
+    const clamped = Math.min(10, Math.max(0, Number(score)));
+    currentSelection.focusScore = clamped;
+    const slider = document.getElementById('focus-score-slider');
+    if (slider) slider.value = clamped;
+    updateFocusUI(clamped);
+  }
+
+  function updateFocusUI(score) {
+    document.getElementById('focus-val-display').innerText = score;
+    const tag = document.getElementById('focus-status-tag');
+    if (score <= 1) {
+      tag.innerText = `${score}分（極差 / 嚴重渙散 / 眼神呆滯）`;
+      tag.style.color = '#dc2626';
+      tag.style.borderColor = '#fca5a5';
+      tag.style.background = '#fef2f2';
+    } else if (score <= 3) {
+      tag.innerText = `${score}分（偏低 / 易分心 / 注意力短暫）`;
+      tag.style.color = '#ea580c';
+      tag.style.borderColor = '#fed7aa';
+      tag.style.background = '#fff7ed';
+    } else if (score <= 5) {
+      tag.innerText = `${score}分（普通 / 能維持基本日常應答）`;
+      tag.style.color = '#d97706';
+      tag.style.borderColor = '#fde68a';
+      tag.style.background = '#fffbeb';
+    } else if (score <= 7) {
+      tag.innerText = `${score}分（良好 / 能主動配合與交流）`;
+      tag.style.color = '#16a34a';
+      tag.style.borderColor = '#86efac';
+      tag.style.background = '#f0fdf4';
+    } else if (score <= 9) {
+      tag.innerText = `${score}分（甚佳 / 反應敏銳 / 興致高）`;
+      tag.style.color = '#0284c7';
+      tag.style.borderColor = '#bae6fd';
+      tag.style.background = '#f0f9ff';
+    } else {
+      tag.innerText = `10分（滿分 / 專注力與警覺度極佳）`;
+      tag.style.color = '#7c3aed';
+      tag.style.borderColor = '#ddd6fe';
+      tag.style.background = '#f5f3ff';
+    }
+  }
+
   // Absence Slider Logic (0 ~ 12 hr)
   function onAbsenceSliderInput(val) {
     const hours = Math.round(Number(val) * 2) / 2;
@@ -1554,6 +1717,7 @@
       listEl.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
     });
     setSpeechHours(0);
+    setFocusScore(5);
     setAbsenceHours(0);
     document.getElementById('notes-input').value = '';
 
@@ -1565,6 +1729,7 @@
         setCategoryUI('bath', rec.bath);
       }
       setSpeechHours(extractSpeechHours(rec));
+      setFocusScore(extractFocusScore(rec));
       setAbsenceHours(extractAbsenceHours(rec));
 
       if (rec.notes) {
@@ -1610,6 +1775,7 @@
       eating: currentSelection.eating,
       bath: currentSelection.bath,
       speechHours: Number(currentSelection.speechHours || 0),
+      focusScore: Number(currentSelection.focusScore ?? 5),
       absenceHours: Number(currentSelection.absenceHours || 0),
       notes: notes,
       updatedAt: new Date().toISOString()
@@ -1662,6 +1828,8 @@
       const eatingText = r.eating !== null && r.eating !== undefined ? `${r.eating}分: ${DEFINITIONS.eating[r.eating] || '自訂'}` : '未記錄';
       const bathText = r.bath !== null && r.bath !== undefined ? `${r.bath}分: ${DEFINITIONS.bath[r.bath] || '自訂'}` : '未記錄';
       const sHours = extractSpeechHours(r);
+      const fScore = extractFocusScore(r);
+      const totalCombined = (sHours + fScore).toFixed(1);
       const aHours = extractAbsenceHours(r);
 
       html += `
@@ -1677,20 +1845,28 @@
           </div>
           <div class="history-metrics">
             <div class="metric-badge-row">
-              <span class="metric-label" style="color:var(--eating-color)">🍚 吃飯</span>
-              <span class="metric-value-pill pill-eating">${eatingText}</span>
-            </div>
-            <div class="metric-badge-row">
-              <span class="metric-label" style="color:var(--bath-color)">🚿 洗澡</span>
-              <span class="metric-value-pill pill-bath">${bathText}</span>
+              <span class="metric-label" style="color:var(--total-color)">🌟 綜合分</span>
+              <span class="metric-value-pill pill-total">${totalCombined} 分 (講話${sHours.toFixed(1)}h + 專注${fScore}分)</span>
             </div>
             <div class="metric-badge-row">
               <span class="metric-label" style="color:var(--speech-color)">🗣️ 講話</span>
               <span class="metric-value-pill pill-speech">${sHours.toFixed(1)} 小時</span>
             </div>
             <div class="metric-badge-row">
+              <span class="metric-label" style="color:var(--focus-color)">🎯 專注力</span>
+              <span class="metric-value-pill pill-focus">${fScore} 分</span>
+            </div>
+            <div class="metric-badge-row">
               <span class="metric-label" style="color:var(--absence-color)">🧠 失神</span>
               <span class="metric-value-pill pill-absence">${aHours.toFixed(1)} 小時</span>
+            </div>
+            <div class="metric-badge-row">
+              <span class="metric-label" style="color:var(--eating-color)">🍚 吃飯</span>
+              <span class="metric-value-pill pill-eating">${eatingText}</span>
+            </div>
+            <div class="metric-badge-row">
+              <span class="metric-label" style="color:var(--bath-color)">🚿 洗澡</span>
+              <span class="metric-value-pill pill-bath">${bathText}</span>
             </div>
           </div>
           ${r.notes ? `<div class="history-notes-box"><b>備註：</b>${escapeHtml(r.notes)}</div>` : ''}
@@ -1724,25 +1900,20 @@
     }
   }
 
-  // Set Chart Type Toggle (both / speech / absence)
+  // Set Chart Type Toggle (all / total / speech / focus)
   function setChartType(type) {
     chartViewType = type;
     document.querySelectorAll('.type-pill').forEach(btn => btn.classList.remove('active'));
     document.getElementById(`type-${type}`).classList.add('active');
 
-    // Update legend visibility
+    // Update legend items visibility
+    const legTotal = document.getElementById('legend-total');
     const legSpeech = document.getElementById('legend-speech');
-    const legAbsence = document.getElementById('legend-absence');
-    if (type === 'both') {
-      legSpeech.style.display = 'flex';
-      legAbsence.style.display = 'flex';
-    } else if (type === 'speech') {
-      legSpeech.style.display = 'flex';
-      legAbsence.style.display = 'none';
-    } else {
-      legSpeech.style.display = 'none';
-      legAbsence.style.display = 'flex';
-    }
+    const legFocus = document.getElementById('legend-focus');
+
+    legTotal.style.display = (type === 'all' || type === 'total') ? 'flex' : 'none';
+    legSpeech.style.display = (type === 'all' || type === 'speech') ? 'flex' : 'none';
+    legFocus.style.display = (type === 'all' || type === 'focus') ? 'flex' : 'none';
 
     renderStats();
   }
@@ -1765,27 +1936,31 @@
     const dates = Object.keys(records).sort();
 
     // Calculate averages
-    let sumSpeech7 = 0, sumAbsence7 = 0, count7 = 0;
-    let sumSpeech30 = 0, sumAbsence30 = 0, count30 = 0;
+    let sumSpeech7 = 0, sumFocus7 = 0, sumTotal7 = 0, count7 = 0;
+    let sumTotal30 = 0, count30 = 0;
 
     const recent7 = dates.slice(-7);
     recent7.forEach(d => {
-      sumSpeech7 += extractSpeechHours(records[d]);
-      sumAbsence7 += extractAbsenceHours(records[d]);
+      const s = extractSpeechHours(records[d]);
+      const f = extractFocusScore(records[d]);
+      sumSpeech7 += s;
+      sumFocus7 += f;
+      sumTotal7 += (s + f);
       count7++;
     });
 
     const recent30 = dates.slice(-30);
     recent30.forEach(d => {
-      sumSpeech30 += extractSpeechHours(records[d]);
-      sumAbsence30 += extractAbsenceHours(records[d]);
+      const s = extractSpeechHours(records[d]);
+      const f = extractFocusScore(records[d]);
+      sumTotal30 += (s + f);
       count30++;
     });
 
+    document.getElementById('stat-avg-total').innerText = count7 ? (sumTotal7 / count7).toFixed(1) + ' 分' : '-';
     document.getElementById('stat-avg-speech').innerText = count7 ? (sumSpeech7 / count7).toFixed(1) + ' hr' : '-';
-    document.getElementById('stat-avg-absence').innerText = count7 ? (sumAbsence7 / count7).toFixed(1) + ' hr' : '-';
-    document.getElementById('stat-avg-speech-30').innerText = count30 ? (sumSpeech30 / count30).toFixed(1) + ' hr' : '-';
-    document.getElementById('stat-avg-absence-30').innerText = count30 ? (sumAbsence30 / count30).toFixed(1) + ' hr' : '-';
+    document.getElementById('stat-avg-focus').innerText = count7 ? (sumFocus7 / count7).toFixed(1) + ' 分' : '-';
+    document.getElementById('stat-avg-total-30').innerText = count30 ? (sumTotal30 / count30).toFixed(1) + ' 分' : '-';
 
     // Filter dates based on selected range
     let chartDates = dates;
@@ -1793,11 +1968,11 @@
       chartDates = dates.slice(-chartRangeDays);
     }
 
-    drawHoursTrendChart(chartDates, records);
+    drawCombinedTrendChart(chartDates, records);
   }
 
-  // Canvas Trend Chart (0 ~ 12 hr) with Dual Curve Support & Dynamic Scaling
-  function drawHoursTrendChart(chartDates, records) {
+  // Canvas Trend Chart (Speech, Focus, and Combined Sum)
+  function drawCombinedTrendChart(chartDates, records) {
     const canvas = document.getElementById('trendChart');
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
@@ -1828,9 +2003,9 @@
     const chartW = width - padding.left - padding.right;
     const chartH = height - padding.top - padding.bottom;
 
-    // Y Axis: Fixed 0 to 12 hours
-    const maxY = 12;
-    const yTicks = [0, 2, 4, 6, 8, 10, 12];
+    // Y Axis: Fixed 0 to 24 (since max speech is 12 + max focus is 10 = 22, comfortably within 24)
+    const maxY = 24;
+    const yTicks = [0, 4, 8, 12, 16, 20, 24];
 
     // Draw background grid lines and Y-axis labels
     ctx.lineWidth = 1;
@@ -1847,57 +2022,53 @@
       ctx.stroke();
 
       ctx.fillStyle = tick === 0 ? '#475569' : '#94a3b8';
-      ctx.fillText(tick + 'h', padding.left - 8, yPos + 4);
+      ctx.fillText(tick, padding.left - 8, yPos + 4);
     });
 
     const numPoints = chartDates.length;
     const stepX = numPoints > 1 ? chartW / (numPoints - 1) : chartW / 2;
 
-    // Compute Points
+    // Compute Points for Speech, Focus, and Combined Sum
     const speechPoints = [];
-    const absencePoints = [];
+    const focusPoints = [];
+    const totalPoints = [];
 
     chartDates.forEach((d, idx) => {
       const r = records[d];
       const sH = extractSpeechHours(r);
-      const aH = extractAbsenceHours(r);
+      const fS = extractFocusScore(r);
+      const tot = sH + fS;
+
       const x = numPoints > 1 ? padding.left + idx * stepX : padding.left + chartW / 2;
 
       const yS = padding.top + chartH - (Math.min(sH, maxY) / maxY) * chartH;
-      const yA = padding.top + chartH - (Math.min(aH, maxY) / maxY) * chartH;
+      const yF = padding.top + chartH - (Math.min(fS, maxY) / maxY) * chartH;
+      const yT = padding.top + chartH - (Math.min(tot, maxY) / maxY) * chartH;
 
-      speechPoints.push({ x, y: yS, hours: sH, date: d });
-      absencePoints.push({ x, y: yA, hours: aH, date: d });
+      speechPoints.push({ x, y: yS, val: sH, date: d });
+      focusPoints.push({ x, y: yF, val: fS, date: d });
+      totalPoints.push({ x, y: yT, val: tot, date: d });
     });
 
-    // Helper to draw a series
-    function renderSeries(pts, color, gradStart, isArea) {
+    // Helper to draw a line/curve series
+    function renderSeries(pts, color, lineWidth = 2.5, isDashed = false) {
       if (pts.length === 0) return;
 
-      // Area fill
-      if (isArea) {
-        const grad = ctx.createLinearGradient(0, padding.top, 0, padding.top + chartH);
-        grad.addColorStop(0, gradStart);
-        grad.addColorStop(1, 'rgba(255, 255, 255, 0.01)');
-
-        ctx.beginPath();
-        ctx.moveTo(pts[0].x, padding.top + chartH);
-        pts.forEach(p => ctx.lineTo(p.x, p.y));
-        ctx.lineTo(pts[pts.length - 1].x, padding.top + chartH);
-        ctx.closePath();
-        ctx.fillStyle = grad;
-        ctx.fill();
+      ctx.strokeStyle = color;
+      ctx.lineWidth = lineWidth;
+      if (isDashed) {
+        ctx.setLineDash([4, 4]);
+      } else {
+        ctx.setLineDash([]);
       }
 
-      // Line
-      ctx.strokeStyle = color;
-      ctx.lineWidth = numPoints > 50 ? 1.8 : 2.6;
       ctx.beginPath();
       pts.forEach((p, idx) => {
         if (idx === 0) ctx.moveTo(p.x, p.y);
         else ctx.lineTo(p.x, p.y);
       });
       ctx.stroke();
+      ctx.setLineDash([]); // Reset
 
       // Dots
       if (numPoints <= 40) {
@@ -1914,14 +2085,35 @@
       }
     }
 
-    // Draw based on chartViewType
-    if (chartViewType === 'both') {
-      renderSeries(speechPoints, '#16a34a', 'rgba(22, 163, 74, 0.18)', true);
-      renderSeries(absencePoints, '#9333ea', 'rgba(147, 51, 234, 0.18)', true);
+    // Area fill for total curve when in total-only mode
+    if (chartViewType === 'total' && totalPoints.length > 0) {
+      const grad = ctx.createLinearGradient(0, padding.top, 0, padding.top + chartH);
+      grad.addColorStop(0, 'rgba(79, 70, 229, 0.25)');
+      grad.addColorStop(1, 'rgba(79, 70, 229, 0.01)');
+
+      ctx.beginPath();
+      ctx.moveTo(totalPoints[0].x, padding.top + chartH);
+      totalPoints.forEach(p => ctx.lineTo(p.x, p.y));
+      ctx.lineTo(totalPoints[totalPoints.length - 1].x, padding.top + chartH);
+      ctx.closePath();
+      ctx.fillStyle = grad;
+      ctx.fill();
+    }
+
+    // Draw based on selected chartViewType
+    if (chartViewType === 'all') {
+      // Draw Combined Sum (Bold purple-indigo)
+      renderSeries(totalPoints, '#4f46e5', 3.2);
+      // Draw Speech (Green)
+      renderSeries(speechPoints, '#16a34a', 2.2);
+      // Draw Focus (Amber)
+      renderSeries(focusPoints, '#d97706', 2.2);
+    } else if (chartViewType === 'total') {
+      renderSeries(totalPoints, '#4f46e5', 3.2);
     } else if (chartViewType === 'speech') {
-      renderSeries(speechPoints, '#16a34a', 'rgba(22, 163, 74, 0.28)', true);
-    } else if (chartViewType === 'absence') {
-      renderSeries(absencePoints, '#9333ea', 'rgba(147, 51, 234, 0.28)', true);
+      renderSeries(speechPoints, '#16a34a', 2.8);
+    } else if (chartViewType === 'focus') {
+      renderSeries(focusPoints, '#d97706', 2.8);
     }
 
     // Dynamic X-Axis Date Scaling
@@ -1963,11 +2155,13 @@
     }
 
     let csv = '﻿'; // UTF-8 BOM for Excel
-    csv += '日期,講話時數(小時),失神時數(小時),吃飯等級,吃飯描述,洗澡等級,洗澡描述,備註,最後更新時間\n';
+    csv += '日期,講話時數(小時),專注力分數(0-10分),綜合加總分數,失神時數(小時),吃飯等級,吃飯描述,洗澡等級,洗澡描述,備註,最後更新時間\n';
 
     dates.forEach(d => {
       const r = records[d];
       const sHours = extractSpeechHours(r);
+      const fScore = extractFocusScore(r);
+      const totalScore = (sHours + fScore).toFixed(1);
       const aHours = extractAbsenceHours(r);
       const eScore = r.eating !== null && r.eating !== undefined ? r.eating : '';
       const eText = DEFINITIONS.eating[r.eating] || '';
@@ -1976,7 +2170,7 @@
       const notes = (r.notes || '').replace(/"/g, '""');
       const updatedAt = r.updatedAt || '';
 
-      csv += `"${d}","${sHours}","${aHours}","${eScore}","${eText}","${bScore}","${bText}","${notes}","${updatedAt}"\n`;
+      csv += `"${d}","${sHours}","${fScore}","${totalScore}","${aHours}","${eScore}","${eText}","${bScore}","${bText}","${notes}","${updatedAt}"\n`;
     });
 
     const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
@@ -2031,7 +2225,7 @@
     event.target.value = '';
   }
 
-  // Load sample data for demonstration (support 14 or 60 days)
+  // Load sample data for demonstration
   function loadSampleData(daysCount = 14) {
     if (!confirm(`要載入最近 ${daysCount} 天的示範資料供檢視與驗證曲線圖嗎？`)) return;
 
@@ -2045,11 +2239,13 @@
       const day = String(d.getDate()).padStart(2, '0');
       const dStr = `${year}-${month}-${day}`;
 
-      // Simulate realistic fluctuation of speech & absence (0 to 12 hours)
+      // Simulate realistic fluctuation of speech, focus, & absence
       const speechCycles = [2.0, 4.5, 6.0, 7.5, 3.5, 1.0, 0.0, 3.0, 5.0, 8.0, 4.0, 6.5, 9.0, 2.5];
+      const focusCycles = [4, 7, 8, 9, 5, 3, 2, 6, 7, 9, 6, 8, 9, 4];
       const absenceCycles = [3.5, 1.5, 0.5, 0.0, 2.0, 5.0, 6.5, 3.0, 1.0, 0.5, 2.5, 1.0, 0.0, 4.0];
 
       const sHours = speechCycles[i % speechCycles.length];
+      const fScore = focusCycles[i % focusCycles.length];
       const aHours = absenceCycles[i % absenceCycles.length];
       const eChoice = [3, 3, 2, 3, 2, 3, 1][i % 7];
       const bChoice = [2, 2, 1, 2, 2, 1, 2][i % 7];
@@ -2059,8 +2255,9 @@
         eating: eChoice,
         bath: bChoice,
         speechHours: sHours,
+        focusScore: fScore,
         absenceHours: aHours,
-        notes: `日常記錄第 ${daysCount - i} 天：講話 ${sHours}h，失神 ${aHours}h`,
+        notes: `日常記錄第 ${daysCount - i} 天：講話 ${sHours}h，專注 ${fScore}分，綜合 ${(sHours + fScore).toFixed(1)}分`,
         updatedAt: new Date().toISOString()
       };
     }
